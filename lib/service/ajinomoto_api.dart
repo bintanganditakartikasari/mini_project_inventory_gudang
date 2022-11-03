@@ -15,7 +15,7 @@ class AjinomotoAPI {
     }
 
     List<Ajinomoto> data = [];
-    final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
     try {
       final response = await Dio().get(baseURL);
       if (response.data != null && response.data.isNotEmpty) {
@@ -48,7 +48,7 @@ class AjinomotoAPI {
       return null;
     }
 
-    final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
     try {
       final response = await Dio().post(
         baseURL,
