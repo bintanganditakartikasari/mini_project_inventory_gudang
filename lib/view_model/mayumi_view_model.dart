@@ -18,7 +18,7 @@ class MayumiViewModel with ChangeNotifier {
 
   Future<void> getMayumiData() async {
     try {
-      final result = await MayumiAPI.getMayumi();
+      final result = await MayumiAPI().getMayumi();
       result.sort(
         ((a, b) => a.tanggalProduksi.toString().compareTo(b.tanggalProduksi.toString()))
       );
@@ -48,7 +48,7 @@ class MayumiViewModel with ChangeNotifier {
       if (result != null) {
         _mayumi.add(result);
         _mayumi.sort(
-          (a, b) => a.tanggalProduksi.toString().compareTo(b.tanggalProduksi.toString()),
+          (a, b) => a.tanggalProduksi.toString().compareTo(b.tanggalProduksi.toString()), 
         );
         notifyListeners();
       }

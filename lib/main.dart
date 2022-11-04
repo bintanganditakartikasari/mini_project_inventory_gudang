@@ -40,12 +40,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SharedPreferences prefs = SharedPreferences.getInstance() as SharedPreferences;
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => ThemeChanger(isDarkTheme: prefs.getBool('isDarkTheme') ?? false)
-        ),
         ChangeNotifierProvider(
           create: (context) => AjinomotoViewModel(),
         ),
@@ -59,27 +55,43 @@ class MyApp extends StatelessWidget {
           create: (context) => SajikuViewModel(),
         ),
       ],
-      child: Consumer<ThemeChanger>(
-        builder: (context, value, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
-            theme: value.getTheme(),
-            initialRoute: HomeScreen.routeName,
-            // routes: {
-            //   HomeScreen.routeName:(context) => const HomeScreen(),
-            //   AjinomotoScreen.routeName:(context) => const AjinomotoScreen(),
-            //   MasakoScreen.routeName:(context) => const MasakoScreen(),
-            //   MayumiScreen.routeName:(context) => const MayumiScreen(),
-            //   SajikuScreen.routeName:(context) => const SajikuScreen(),
-            //   AjinomotoEntryScreen.routeName:(context) => const AjinomotoEntryScreen(),
-            //   MasakoEntryScreen.routeName:(context) => const MasakoEntryScreen(),
-            //   MayumiEntryScreen.routeName:(context) => const MayumiEntryScreen(),
-            //   SajikuEntryScreen.routeName:(context) => const SajikuEntryScreen(),
-            // },
-          );
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        initialRoute: HomeScreen.routeName,
+        routes: {
+          HomeScreen.routeName:(context) => const HomeScreen(),
+          AjinomotoScreen.routeName:(context) => const AjinomotoScreen(),
+          MasakoScreen.routeName:(context) => const MasakoScreen(),
+          MayumiScreen.routeName:(context) => const MayumiScreen(),
+          SajikuScreen.routeName:(context) => const SajikuScreen(),
+          AjinomotoEntryScreen.routeName:(context) => const AjinomotoEntryScreen(),
+          MasakoEntryScreen.routeName:(context) => const MasakoEntryScreen(),
+          MayumiEntryScreen.routeName:(context) => const MayumiEntryScreen(),
+          SajikuEntryScreen.routeName:(context) => const SajikuEntryScreen(),
         },
       ),
+      // child: Consumer<ThemeChanger>(
+      //   builder: (context, value, child) {
+      //     return MaterialApp(
+      //       debugShowCheckedModeBanner: false,
+      //       title: 'Flutter Demo',
+      //       theme: value.getTheme(),
+      //       initialRoute: HomeScreen.routeName,
+      //       routes: {
+              // HomeScreen.routeName:(context) => const HomeScreen(),
+              // AjinomotoScreen.routeName:(context) => const AjinomotoScreen(),
+              // MasakoScreen.routeName:(context) => const MasakoScreen(),
+              // MayumiScreen.routeName:(context) => const MayumiScreen(),
+              // SajikuScreen.routeName:(context) => const SajikuScreen(),
+              // AjinomotoEntryScreen.routeName:(context) => const AjinomotoEntryScreen(),
+              // MasakoEntryScreen.routeName:(context) => const MasakoEntryScreen(),
+              // MayumiEntryScreen.routeName:(context) => const MayumiEntryScreen(),
+              // SajikuEntryScreen.routeName:(context) => const SajikuEntryScreen(),
+      //       },
+      //     );
+      //   },
+      // ),
     );
   }
 }

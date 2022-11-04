@@ -95,13 +95,13 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                 ],
               ),
             ),
-            Column(
-              children: [
-                for(int i = 0; i < ajinomotoList.length; i++)
-                  ajinomotoWidget(ajinomotoList[i]
-                ),
-              ],
-            ),
+            // Column(
+            //   children: [
+            //     for(int i = 0; i < ajinomotoList.length; i++)
+            //       ajinomotoWidget(ajinomotoList[i]
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/models/masako_model.dart';
 import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_masako.dart';
+import 'package:mini_project_inventory_gudang/screen/masako_produk.dart';
+import 'package:mini_project_inventory_gudang/view_model/masako_view_model.dart';
+import 'package:provider/provider.dart';
 
 class MasakoScreen extends StatefulWidget {
   static const routeName = '/home/masako';
@@ -39,6 +42,7 @@ class _MasakoScreenState extends State<MasakoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final masako = Provider.of<MasakoViewModel>(context).masako;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -95,13 +99,17 @@ class _MasakoScreenState extends State<MasakoScreen> {
                 ],
               ),
             ),
-            Column(
-              children: [
-                for(int i = 0; i < masakoList.length; i++)
-                  masakoWidget(masakoList[i]
+            ListView.separated(
+              itemBuilder: (context, index) => MasakoProduk(
+                masako[index],
+                key: Key(
+                  masako[index].id.toString(),
                 ),
-              ],
-            ),
+              ), 
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 10,
+              ), 
+              itemCount: masako.length)
           ],
         ),
       ),
@@ -145,99 +153,99 @@ class _MasakoScreenState extends State<MasakoScreen> {
   //   });
   // }
   
-  Widget masakoWidget(Masako masakoList) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 170,
-      padding: const EdgeInsets.all(10),
-      margin:  const EdgeInsets.only(top: 20, left: 20, right: 20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color.fromARGB(255, 48, 160, 143), width: 2),
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  // Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  // Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  // Text('Tanggal Produksi Produk\t : ${masakoList.masakoData!.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  // Text('Tanggal Expired Produk\t\t\t\t: ${masakoList.masakoData!.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Container(
-            padding: const EdgeInsets.all(5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: (){
-                    // namaController.text = masakoList.masakoData.nama!;
-                    // beratController.text = masakoList.masakoData.berat!;
-                    // jumlahController.text = masakoList.masakoData.jumlah!;
-                    // produksiController.text = masakoList.masakoData.tanggalProduksi!;
-                    // expiredController.text = masakoList.masakoData.tanggalExpired!;
-                    // deleteMasakoData = true;
-                    // deletemasakoDialog(key: masakoList.key);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 48, 160, 143),
-                      borderRadius: BorderRadius.circular(50)
-                    ),
-                    child: const Icon(
-                      Icons.delete, 
-                      size: 25,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                InkWell(
-                  onTap: (){
-                    // namaController.text = masakoList.masakoData.nama!;
-                    // beratController.text = masakoList.masakoData.berat!;
-                    // jumlahController.text = masakoList.masakoData.jumlah!;
-                    // produksiController.text = masakoList.masakoData.tanggalProduksi!;
-                    // expiredController.text = masakoList.masakoData.tanggalExpired!;
-                    // updateMasakoData = true;
-                    // updatemasakoDialog(key: masakoList.key);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 48, 160, 143),
-                      borderRadius: BorderRadius.circular(50)
-                    ),
-                    child: const Icon(
-                      Icons.edit, 
-                      size: 25,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget masakoWidget(Masako masakoList) {
+  //   return Container(
+  //     width: MediaQuery.of(context).size.width,
+  //     height: 170,
+  //     padding: const EdgeInsets.all(10),
+  //     margin:  const EdgeInsets.only(top: 20, left: 20, right: 20),
+  //     decoration: BoxDecoration(
+  //       color: Colors.white,
+  //       borderRadius: BorderRadius.circular(10),
+  //       border: Border.all(color: const Color.fromARGB(255, 48, 160, 143), width: 2),
+  //     ),
+  //     child: Column(
+  //       children: [
+  //         Row(
+  //           children: [
+  //             Column(
+  //               mainAxisAlignment: MainAxisAlignment.start,
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //               children: [
+  //                 // Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+  //                 // Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+  //                 // Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+  //                 // Text('Tanggal Produksi Produk\t : ${masakoList.masakoData!.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+  //                 // Text('Tanggal Expired Produk\t\t\t\t: ${masakoList.masakoData!.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+  //               ],
+  //             ),
+  //           ],
+  //         ),
+  //         const SizedBox(
+  //           height: 5,
+  //         ),
+  //         Container(
+  //           padding: const EdgeInsets.all(5),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             crossAxisAlignment: CrossAxisAlignment.center,
+  //             children: [
+  //               InkWell(
+  //                 onTap: (){
+  //                   // namaController.text = masakoList.masakoData.nama!;
+  //                   // beratController.text = masakoList.masakoData.berat!;
+  //                   // jumlahController.text = masakoList.masakoData.jumlah!;
+  //                   // produksiController.text = masakoList.masakoData.tanggalProduksi!;
+  //                   // expiredController.text = masakoList.masakoData.tanggalExpired!;
+  //                   // deleteMasakoData = true;
+  //                   // deletemasakoDialog(key: masakoList.key);
+  //                 },
+  //                 child: Container(
+  //                   padding: const EdgeInsets.all(5),
+  //                   decoration: BoxDecoration(
+  //                     color: const Color.fromARGB(255, 48, 160, 143),
+  //                     borderRadius: BorderRadius.circular(50)
+  //                   ),
+  //                   child: const Icon(
+  //                     Icons.delete, 
+  //                     size: 25,
+  //                     color: Colors.white,
+  //                   ),
+  //                 ),
+  //               ),
+  //               const SizedBox(
+  //                 width: 10,
+  //               ),
+  //               InkWell(
+  //                 onTap: (){
+  //                   // namaController.text = masakoList.masakoData.nama!;
+  //                   // beratController.text = masakoList.masakoData.berat!;
+  //                   // jumlahController.text = masakoList.masakoData.jumlah!;
+  //                   // produksiController.text = masakoList.masakoData.tanggalProduksi!;
+  //                   // expiredController.text = masakoList.masakoData.tanggalExpired!;
+  //                   // updateMasakoData = true;
+  //                   // updatemasakoDialog(key: masakoList.key);
+  //                 },
+  //                 child: Container(
+  //                   padding: const EdgeInsets.all(5),
+  //                   decoration: BoxDecoration(
+  //                     color: const Color.fromARGB(255, 48, 160, 143),
+  //                     borderRadius: BorderRadius.circular(50)
+  //                   ),
+  //                   child: const Icon(
+  //                     Icons.edit, 
+  //                     size: 25,
+  //                     color: Colors.white,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   void updatemasakoDialog({String? key}) async {
     showDialog(

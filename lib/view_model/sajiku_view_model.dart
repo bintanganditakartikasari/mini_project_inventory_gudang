@@ -18,7 +18,7 @@ class SajikuViewModel with ChangeNotifier {
 
   Future<void> getSajikuData() async {
     try {
-      final result = await SajikuAPI.getSajiku();
+      final result = await SajikuAPI().getSajiku();
       result.sort(
         ((a, b) => a.tanggalProduksi.toString().compareTo(b.tanggalProduksi.toString()))
       );
