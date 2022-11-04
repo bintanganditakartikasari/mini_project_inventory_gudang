@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/provider/provider_theme.dart';
-import 'package:mini_project_inventory_gudang/screen/ajinomoto/ajinomoto_screen.dart';
-import 'package:mini_project_inventory_gudang/screen/masako/masako_screen.dart';
-import 'package:mini_project_inventory_gudang/screen/mayumi/mayumi_screen.dart';
-import 'package:mini_project_inventory_gudang/screen/sajiku/sajiku_screen.dart';
+import 'package:mini_project_inventory_gudang/screen/ajinomoto_screen.dart';
+import 'package:mini_project_inventory_gudang/screen/masako_screen.dart';
+import 'package:mini_project_inventory_gudang/screen/mayumi_screen.dart';
+import 'package:mini_project_inventory_gudang/screen/sajiku_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {

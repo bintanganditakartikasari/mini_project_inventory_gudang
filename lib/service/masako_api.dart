@@ -8,38 +8,67 @@ class MasakoAPI {
   static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Masako';
   // final Dio _dio = Dio();
 
-  Future<List<Masako>> getMasako() async {
+  // Future<List<Masako>> getMasako() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   if(!prefs.containsKey('Masako')){
+  //     return [];
+  //   }
+
+  //   List<Masako> data = [];
+  //   final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
+  //   try {
+  //     final response = await Dio().get(baseURL);
+  //     if (response.data != null && response.data.isNotEmpty) {
+  //     final extractedData = response.data as Map<String, dynamic>;
+  //     if(extractedData.isEmpty) {
+  //       return [];
+  //     }
+  //     extractedData.forEach((key, value) {
+  //       data.add(
+  //         Masako(
+  //           id: key.toString(),
+  //           nama: value['nama produk'].toString(),
+  //           berat: value['berat produk'].toString(),
+  //           jumlah: value['jumlah produk'].toString(),
+  //           tanggalProduksi: value['tanggal produksi'].toString(),
+  //           tanggalExpired: value['tanggal expired'].toString(),
+  //         ),
+  //       );
+  //     });
+  //   } 
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  //   return data;
+  // }
+
+  static Future<List<Masako>> getMasako() async {
     final prefs = await SharedPreferences.getInstance();
     if(!prefs.containsKey('Masako')){
       return [];
     }
 
-    List<Masako> data = [];
-    final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
+    // List<Ajinomoto> data = [];
+    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
     try {
       final response = await Dio().get(baseURL);
-      if (response.data != null && response.data.isNotEmpty) {
-      final extractedData = response.data as Map<String, dynamic>;
-      if(extractedData.isEmpty) {
-        return [];
-      }
-      extractedData.forEach((key, value) {
-        data.add(
-          Masako(
-            id: key.toString(),
-            nama: value['nama produk'].toString(),
-            berat: value['berat produk'].toString(),
-            jumlah: value['jumlah produk'].toString(),
-            tanggalProduksi: value['tanggal produksi'].toString(),
-            tanggalExpired: value['tanggal expired'].toString(),
-          ),
-        );
-      });
-    } 
+      var key;
+      var value;
+      
+      List<Masako> masako = (response.data as List).map((masako) => Masako(
+        id: key.toString(), 
+        nama: value['nama produk'].toString(), 
+        berat: value['berat produk'].toString(), 
+        jumlah: value['jumlah produk'].toString(), 
+        tanggalProduksi: value['tanggal produksi'].toString(), 
+        tanggalExpired: value['tanggal expired'].toString()
+        ),
+      ).toList();
+
+      return masako;
     } catch (e) {
       rethrow;
     }
-    return data;
   }
 
   static Future<Masako?> addMasako(Masako masako) async {

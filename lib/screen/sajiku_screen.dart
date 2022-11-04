@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/models/sajiku_model.dart';
-import 'package:mini_project_inventory_gudang/screen/produk%20baru/entry_screen_sajiku.dart';
+import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_sajiku.dart';
 
 class SajikuScreen extends StatefulWidget {
   static const routeName = '/home/sajiku';
@@ -30,12 +30,12 @@ class _SajikuScreenState extends State<SajikuScreen> {
 
   List<Sajiku> sajikuList = [];
 
-  @override
-  void initState(){
-    super.initState();
+  // @override
+  // void initState(){
+  //   super.initState();
 
-    retrieveSajikuData();
-  }
+  //   retrieveSajikuData();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -136,14 +136,14 @@ class _SajikuScreenState extends State<SajikuScreen> {
     );
   }
   
-  void retrieveSajikuData() {
-    dbRef.child('Sajiku').onChildAdded.listen((data) {
-      SajikuData sajikuData = SajikuData.fromJson(data.snapshot.value as Map);
-      Sajiku sajiku = Sajiku(key: data.snapshot.key, sajikuData: sajikuData);
-      sajikuList.add(sajiku);
-      setState(() {});
-    });
-  }
+  // void retrieveSajikuData() {
+  //   dbRef.child('Sajiku').onChildAdded.listen((data) {
+  //     SajikuData sajikuData = SajikuData.fromJson(data.snapshot.value as Map);
+  //     Sajiku sajiku = Sajiku(key: data.snapshot.key, sajikuData: sajikuData);
+  //     sajikuList.add(sajiku);
+  //     setState(() {});
+  //   });
+  // }
   
   Widget sajikuWidget(Sajiku sajikuList) {
     return Container(
@@ -164,11 +164,11 @@ class _SajikuScreenState extends State<SajikuScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${sajikuList.sajikuData!.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${sajikuList.sajikuData!.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${sajikuList.sajikuData!.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Produksi Produk\t : ${sajikuList.sajikuData!.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Expired Produk\t\t\t\t: ${sajikuList.sajikuData!.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${sajikuList.sajikuData!.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${sajikuList.sajikuData!.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${sajikuList.sajikuData!.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Tanggal Produksi Produk\t : ${sajikuList.sajikuData!.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Tanggal Expired Produk\t\t\t\t: ${sajikuList.sajikuData!.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
                 ],
               ),
             ],
@@ -184,13 +184,13 @@ class _SajikuScreenState extends State<SajikuScreen> {
               children: [
                 InkWell(
                   onTap: (){
-                    namaController.text = sajikuList.sajikuData.nama!;
-                    beratController.text = sajikuList.sajikuData.berat!;
-                    jumlahController.text = sajikuList.sajikuData.jumlah!;
-                    produksiController.text = sajikuList.sajikuData.tanggalProduksi!;
-                    expiredController.text = sajikuList.sajikuData.tanggalExpired!;
-                    deleteSajikuData = true;
-                    deletesajikuDialog(key: sajikuList.key);
+                    // namaController.text = sajikuList.sajikuData.nama!;
+                    // beratController.text = sajikuList.sajikuData.berat!;
+                    // jumlahController.text = sajikuList.sajikuData.jumlah!;
+                    // produksiController.text = sajikuList.sajikuData.tanggalProduksi!;
+                    // expiredController.text = sajikuList.sajikuData.tanggalExpired!;
+                    // deleteSajikuData = true;
+                    // deletesajikuDialog(key: sajikuList.key);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(5),
@@ -210,13 +210,13 @@ class _SajikuScreenState extends State<SajikuScreen> {
                 ),
                 InkWell(
                   onTap: (){
-                    namaController.text = sajikuList.sajikuData.nama!;
-                    beratController.text = sajikuList.sajikuData.berat!;
-                    jumlahController.text = sajikuList.sajikuData.jumlah!;
-                    produksiController.text = sajikuList.sajikuData.tanggalProduksi!;
-                    expiredController.text = sajikuList.sajikuData.tanggalExpired!;
-                    updateSajikuData = true;
-                    updatesajikuDialog(key:sajikuList.key);
+                    // namaController.text = sajikuList.sajikuData.nama!;
+                    // beratController.text = sajikuList.sajikuData.berat!;
+                    // jumlahController.text = sajikuList.sajikuData.jumlah!;
+                    // produksiController.text = sajikuList.sajikuData.tanggalProduksi!;
+                    // expiredController.text = sajikuList.sajikuData.tanggalExpired!;
+                    // updateSajikuData = true;
+                    // updatesajikuDialog(key:sajikuList.key);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(5),
@@ -373,29 +373,29 @@ class _SajikuScreenState extends State<SajikuScreen> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Map<String, dynamic> sajikudata = {
-                      'nama produk': namaController.text,
-                      'berat produk': beratController.text,
-                      'jumlah produk': jumlahController.text,
-                      'tanggal produksi': produksiController.text,
-                      'tanggal expired': expiredController.text,
-                    };
+                    // Map<String, dynamic> sajikudata = {
+                    //   'nama produk': namaController.text,
+                    //   'berat produk': beratController.text,
+                    //   'jumlah produk': jumlahController.text,
+                    //   'tanggal produksi': produksiController.text,
+                    //   'tanggal expired': expiredController.text,
+                    // };
 
-                    if(updateSajikuData) {
-                      dbRefSajiku.child('Sajiku').child(key!).update(sajikudata).then((value) {
-                        int index = sajikuList.indexWhere((element) => element.key == key);
-                        sajikuList.removeAt(index);
-                        sajikuList.insert(index, Sajiku(key: key, sajikuData: SajikuData.fromJson(sajikudata)));
-                        setState(() {
+                    // if(updateSajikuData) {
+                    //   dbRefSajiku.child('Sajiku').child(key!).update(sajikudata).then((value) {
+                    //     int index = sajikuList.indexWhere((element) => element.key == key);
+                    //     sajikuList.removeAt(index);
+                    //     sajikuList.insert(index, Sajiku(key: key, sajikuData: SajikuData.fromJson(sajikudata)));
+                    //     setState(() {
                           
-                        });
-                        Navigator.of(context).pop();
-                      });
-                    } else {
-                      dbRefSajiku.child('Sajiku').push().set(sajikudata).then((value) {
-                      Navigator.of(context).pop();
-                    });
-                    }
+                    //     });
+                    //     Navigator.of(context).pop();
+                    //   });
+                    // } else {
+                    //   dbRefSajiku.child('Sajiku').push().set(sajikudata).then((value) {
+                    //   Navigator.of(context).pop();
+                    // });
+                    // }
                   },
                     style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
@@ -443,26 +443,26 @@ class _SajikuScreenState extends State<SajikuScreen> {
 
                   ElevatedButton(
                     onPressed: () {
-                      Map<String, dynamic> sajikudata = {
-                        'nama produk': namaController.text,
-                        'berat produk': beratController.text,
-                        'jumlah produk': jumlahController.text,
-                        'tanggal produksi': produksiController.text,
-                        'tanggal expired': expiredController.text,
-                      };
+                      // Map<String, dynamic> sajikudata = {
+                      //   'nama produk': namaController.text,
+                      //   'berat produk': beratController.text,
+                      //   'jumlah produk': jumlahController.text,
+                      //   'tanggal produksi': produksiController.text,
+                      //   'tanggal expired': expiredController.text,
+                      // };
 
-                      if(deleteSajikuData) {
-                        dbRefSajiku.child('Ajinomoto').child(key!).remove().then((value) {
-                          int index = sajikuList.indexWhere((element) => element.key == key);
-                          sajikuList.removeAt(index);
-                          setState(() {});
-                          Navigator.of(context).pop();
-                        });
-                      } else {
-                        dbRefSajiku.child('Sajiku').push().set(sajikudata).then((value) {
-                        Navigator.of(context).pop();
-                      });
-                      }
+                      // if(deleteSajikuData) {
+                      //   dbRefSajiku.child('Ajinomoto').child(key!).remove().then((value) {
+                      //     int index = sajikuList.indexWhere((element) => element.key == key);
+                      //     sajikuList.removeAt(index);
+                      //     setState(() {});
+                      //     Navigator.of(context).pop();
+                      //   });
+                      // } else {
+                      //   dbRefSajiku.child('Sajiku').push().set(sajikudata).then((value) {
+                      //   Navigator.of(context).pop();
+                      // });
+                      // }
                     },
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),

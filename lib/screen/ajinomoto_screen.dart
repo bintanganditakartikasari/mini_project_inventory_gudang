@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/models/ajinomoto_model.dart';
-import 'package:mini_project_inventory_gudang/screen/produk%20baru/entry_screen_ajinomoto.dart';
+import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_ajinomoto.dart';
 
 class AjinomotoScreen extends StatefulWidget {
   static const routeName = '/home/ajinomoto';
@@ -30,12 +30,12 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
 
   List<Ajinomoto> ajinomotoList = [];
 
-  @override
-  void initState(){
-    super.initState();
+  // @override
+  // void initState(){
+  //   super.initState();
 
-    retrieveAjinomotoData();
-  }
+  //   retrieveAjinomotoData();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -136,14 +136,14 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
     );
   }
   
-  void retrieveAjinomotoData() {
-    dbRef.child('Ajinomoto').onChildAdded.listen((data) {
-      AjinomotoData ajinomotoData = AjinomotoData.fromJson(data.snapshot.value as Map);
-      Ajinomoto ajinomoto = Ajinomoto(key: data.snapshot.key, ajinomotoData: ajinomotoData);
-      ajinomotoList.add(ajinomoto);
-      setState(() {});
-    });
-  }
+  // void retrieveAjinomotoData() {
+  //   dbRef.child('Ajinomoto').onChildAdded.listen((data) {
+  //     AjinomotoData ajinomotoData = AjinomotoData.fromJson(data.snapshot.value as Map);
+  //     Ajinomoto ajinomoto = Ajinomoto(key: data.snapshot.key, ajinomotoData: ajinomotoData);
+  //     ajinomotoList.add(ajinomoto);
+  //     setState(() {});
+  //   });
+  // }
   
   Widget ajinomotoWidget(Ajinomoto ajinomotoList) {
     return Container(
@@ -164,11 +164,11 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${ajinomotoList.ajinomotoData.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${ajinomotoList.ajinomotoData.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${ajinomotoList.ajinomotoData.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Produksi Produk\t : ${ajinomotoList.ajinomotoData.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Expired Produk\t\t\t\t: ${ajinomotoList.ajinomotoData.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${ajinomotoList.ajinomotoData.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${ajinomotoList.ajinomotoData.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${ajinomotoList.ajinomotoData.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Tanggal Produksi Produk\t : ${ajinomotoList.ajinomotoData.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Tanggal Expired Produk\t\t\t\t: ${ajinomotoList.ajinomotoData.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
                 ],
               ),
             ],
@@ -184,13 +184,14 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
               children: [
                 InkWell(
                   onTap: (){
-                    namaController.text = ajinomotoList.ajinomotoData.nama!;
-                    beratController.text = ajinomotoList.ajinomotoData.berat!;
-                    jumlahController.text = ajinomotoList.ajinomotoData.jumlah!;
-                    produksiController.text = ajinomotoList.ajinomotoData.tanggalProduksi!;
-                    expiredController.text = ajinomotoList.ajinomotoData.tanggalExpired!;
-                    deleteAjinomotoData = true;
-                    deleteajinomotoDialog(key: ajinomotoList.key);
+                    // namaController.text = ajinomotoList.ajinomotoData.nama!;
+                    // beratController.text = ajinomotoList.ajinomotoData.berat!;
+                    // jumlahController.text = ajinomotoList.ajinomotoData.jumlah!;
+                    // produksiController.text = ajinomotoList.ajinomotoData.tanggalProduksi!;
+                    // expiredController.text = ajinomotoList.ajinomotoData.tanggalExpired!;
+                    // deleteAjinomotoData = true;
+                    // deleteajinomotoDialog(key: ajinomotoList.key);
+                    deleteajinomotoDialog();
                   },
                   child: Container(
                     padding: const EdgeInsets.all(5),
@@ -375,13 +376,13 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Map<String, dynamic> ajinomotodata = {
-                      'nama produk': namaController.text,
-                      'berat produk': beratController.text,
-                      'jumlah produk': jumlahController.text,
-                      'tanggal produksi': produksiController.text,
-                      'tanggal expired': expiredController.text,
-                    };
+                    // Map<String, dynamic> ajinomotodata = {
+                    //   'nama produk': namaController.text,
+                    //   'berat produk': beratController.text,
+                    //   'jumlah produk': jumlahController.text,
+                    //   'tanggal produksi': produksiController.text,
+                    //   'tanggal expired': expiredController.text,
+                    // };
 
                     // if(updateAjinomotoData) {
                     //   dbRefAjinomoto.child('Ajinomoto').child(key!).update(ajinomotodata).then((value) {
@@ -447,13 +448,13 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
 
                   ElevatedButton(
                     onPressed: () {
-                      Map<String, dynamic> ajinomotodata = {
-                        'nama produk': namaController.text,
-                        'berat produk': beratController.text,
-                        'jumlah produk': jumlahController.text,
-                        'tanggal produksi': produksiController.text,
-                        'tanggal expired': expiredController.text,
-                      };
+                      // Map<String, dynamic> ajinomotodata = {
+                      //   'nama produk': namaController.text,
+                      //   'berat produk': beratController.text,
+                      //   'jumlah produk': jumlahController.text,
+                      //   'tanggal produksi': produksiController.text,
+                      //   'tanggal expired': expiredController.text,
+                      // };
 
                       // if(deleteAjinomotoData) {
                       //   dbRefAjinomoto.child('Ajinomoto').child(key!).remove().then((value) {

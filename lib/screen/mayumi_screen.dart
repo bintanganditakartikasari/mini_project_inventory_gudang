@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/models/mayumi_model.dart';
-import 'package:mini_project_inventory_gudang/screen/produk%20baru/entry_screen_mayumi.dart';
+import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_mayumi.dart';
 
 class MayumiScreen extends StatefulWidget {
   static const routeName = '/home/mayumi';
@@ -30,12 +30,12 @@ class _MayumiScreenState extends State<MayumiScreen> {
 
   bool deleteMayumiData = false;
 
-  @override
-  void initState(){
-    super.initState();
+  // @override
+  // void initState(){
+  //   super.initState();
 
-    retrieveMayumiData();
-  }
+  //   retrieveMayumiData();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -136,14 +136,14 @@ class _MayumiScreenState extends State<MayumiScreen> {
     );
   }
   
-  void retrieveMayumiData() {
-    dbRef.child('Mayumi').onChildAdded.listen((data) {
-      MayumiData mayumiData = MayumiData.fromJson(data.snapshot.value as Map);
-      Mayumi mayumi = Mayumi(key: data.snapshot.key, mayumiData: mayumiData);
-      mayumiList.add(mayumi);
-      setState(() {});
-    });
-  }
+  // void retrieveMayumiData() {
+  //   dbRef.child('Mayumi').onChildAdded.listen((data) {
+  //     MayumiData mayumiData = MayumiData.fromJson(data.snapshot.value as Map);
+  //     Mayumi mayumi = Mayumi(key: data.snapshot.key, mayumiData: mayumiData);
+  //     mayumiList.add(mayumi);
+  //     setState(() {});
+  //   });
+  // }
   
   Widget mayumiWidget(Mayumi mayumiList) {
     return Container(
@@ -164,11 +164,11 @@ class _MayumiScreenState extends State<MayumiScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${mayumiList.mayumiData!.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${mayumiList.mayumiData!.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${mayumiList.mayumiData!.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Produksi Produk\t : ${mayumiList.mayumiData!.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Expired Produk\t\t\t\t: ${mayumiList.mayumiData!.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${mayumiList.mayumiData!.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${mayumiList.mayumiData!.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${mayumiList.mayumiData!.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Tanggal Produksi Produk\t : ${mayumiList.mayumiData!.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Tanggal Expired Produk\t\t\t\t: ${mayumiList.mayumiData!.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
                 ],
               ),
             ],
@@ -184,13 +184,13 @@ class _MayumiScreenState extends State<MayumiScreen> {
               children: [
                 InkWell(
                   onTap: (){
-                    namaController.text = mayumiList.mayumiData.nama!;
-                    beratController.text = mayumiList.mayumiData.berat!;
-                    jumlahController.text = mayumiList.mayumiData.jumlah!;
-                    produksiController.text = mayumiList.mayumiData.tanggalProduksi!;
-                    expiredController.text = mayumiList.mayumiData.tanggalExpired!;
-                    deleteMayumiData = true;
-                    deletemayumiDialog(key: mayumiList.key);
+                    // namaController.text = mayumiList.mayumiData.nama!;
+                    // beratController.text = mayumiList.mayumiData.berat!;
+                    // jumlahController.text = mayumiList.mayumiData.jumlah!;
+                    // produksiController.text = mayumiList.mayumiData.tanggalProduksi!;
+                    // expiredController.text = mayumiList.mayumiData.tanggalExpired!;
+                    // deleteMayumiData = true;
+                    // deletemayumiDialog(key: mayumiList.key);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(5),
@@ -210,13 +210,13 @@ class _MayumiScreenState extends State<MayumiScreen> {
                 ),
                 InkWell(
                   onTap: (){
-                    namaController.text = mayumiList.mayumiData.nama!;
-                    beratController.text = mayumiList.mayumiData.berat!;
-                    jumlahController.text = mayumiList.mayumiData.jumlah!;
-                    produksiController.text = mayumiList.mayumiData.tanggalProduksi!;
-                    expiredController.text = mayumiList.mayumiData.tanggalExpired!;
-                    updateMayumiData = true;
-                    updatemayumiDialog(key: mayumiList.key);
+                    // namaController.text = mayumiList.mayumiData.nama!;
+                    // beratController.text = mayumiList.mayumiData.berat!;
+                    // jumlahController.text = mayumiList.mayumiData.jumlah!;
+                    // produksiController.text = mayumiList.mayumiData.tanggalProduksi!;
+                    // expiredController.text = mayumiList.mayumiData.tanggalExpired!;
+                    // updateMayumiData = true;
+                    // updatemayumiDialog(key: mayumiList.key);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(5),
@@ -373,29 +373,29 @@ class _MayumiScreenState extends State<MayumiScreen> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Map<String, dynamic> mayumidata = {
-                      'nama produk': namaController.text,
-                      'berat produk': beratController.text,
-                      'jumlah produk': jumlahController.text,
-                      'tanggal produksi': produksiController.text,
-                      'tanggal expired': expiredController.text,
-                    };
+                    // Map<String, dynamic> mayumidata = {
+                    //   'nama produk': namaController.text,
+                    //   'berat produk': beratController.text,
+                    //   'jumlah produk': jumlahController.text,
+                    //   'tanggal produksi': produksiController.text,
+                    //   'tanggal expired': expiredController.text,
+                    // };
 
-                    if(updateMayumiData) {
-                      dbRefMayumi.child('Mayumi').child(key!).update(mayumidata).then((value) {
-                        int index = mayumiList.indexWhere((element) => element.key == key);
-                        mayumiList.removeAt(index);
-                        mayumiList.insert(index, Mayumi(key: key, mayumiData: MayumiData.fromJson(mayumidata)));
-                        setState(() {
+                    // if(updateMayumiData) {
+                    //   dbRefMayumi.child('Mayumi').child(key!).update(mayumidata).then((value) {
+                    //     int index = mayumiList.indexWhere((element) => element.key == key);
+                    //     mayumiList.removeAt(index);
+                    //     mayumiList.insert(index, Mayumi(key: key, mayumiData: MayumiData.fromJson(mayumidata)));
+                    //     setState(() {
                           
-                        });
-                        Navigator.of(context).pop();
-                      });
-                    } else {
-                      dbRefMayumi.child('Mayumi').push().set(mayumidata).then((value) {
-                      Navigator.of(context).pop();
-                    });
-                    }
+                    //     });
+                    //     Navigator.of(context).pop();
+                    //   });
+                    // } else {
+                    //   dbRefMayumi.child('Mayumi').push().set(mayumidata).then((value) {
+                    //   Navigator.of(context).pop();
+                    // });
+                    // }
                   },
                     style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
@@ -443,26 +443,26 @@ class _MayumiScreenState extends State<MayumiScreen> {
 
                   ElevatedButton(
                     onPressed: () {
-                      Map<String, dynamic> mayumidata = {
-                        'nama produk': namaController.text,
-                        'berat produk': beratController.text,
-                        'jumlah produk': jumlahController.text,
-                        'tanggal produksi': produksiController.text,
-                        'tanggal expired': expiredController.text,
-                      };
+                      // Map<String, dynamic> mayumidata = {
+                      //   'nama produk': namaController.text,
+                      //   'berat produk': beratController.text,
+                      //   'jumlah produk': jumlahController.text,
+                      //   'tanggal produksi': produksiController.text,
+                      //   'tanggal expired': expiredController.text,
+                      // };
 
-                      if(deleteMayumiData) {
-                        dbRefMayumi.child('Mayumi').child(key!).remove().then((value) {
-                          int index = mayumiList.indexWhere((element) => element.key == key);
-                          mayumiList.removeAt(index);
-                          setState(() {});
-                          Navigator.of(context).pop();
-                        });
-                      } else {
-                        dbRefMayumi.child('Mayumi').push().set(mayumidata).then((value) {
-                        Navigator.of(context).pop();
-                      });
-                      }
+                      // if(deleteMayumiData) {
+                      //   dbRefMayumi.child('Mayumi').child(key!).remove().then((value) {
+                      //     int index = mayumiList.indexWhere((element) => element.key == key);
+                      //     mayumiList.removeAt(index);
+                      //     setState(() {});
+                      //     Navigator.of(context).pop();
+                      //   });
+                      // } else {
+                      //   dbRefMayumi.child('Mayumi').push().set(mayumidata).then((value) {
+                      //   Navigator.of(context).pop();
+                      // });
+                      // }
                     },
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),

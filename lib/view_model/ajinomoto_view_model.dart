@@ -9,6 +9,12 @@ class AjinomotoViewModel with ChangeNotifier {
     return [..._ajinomoto];
   }
 
+  // getAjinomotoData() async {
+  //   final ajinomotoData = await AjinomotoAPI.getAjinomoto();
+  //   _ajinomoto = ajinomotoData;
+  //   notifyListeners();
+  // }
+
   Future<void> getAjinomotoData() async {
     try {
       final result = await AjinomotoAPI.getAjinomoto();

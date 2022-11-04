@@ -2,7 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/models/masako_model.dart';
-import 'package:mini_project_inventory_gudang/screen/produk%20baru/entry_screen_masako.dart';
+import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_masako.dart';
 
 class MasakoScreen extends StatefulWidget {
   static const routeName = '/home/masako';
@@ -30,12 +30,12 @@ class _MasakoScreenState extends State<MasakoScreen> {
 
   bool deleteMasakoData = false;
 
-  @override
-  void initState(){
-    super.initState();
+  // @override
+  // void initState(){
+  //   super.initState();
 
-    retrieveMasakoData();
-  }
+  //   retrieveMasakoData();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -136,14 +136,14 @@ class _MasakoScreenState extends State<MasakoScreen> {
     );
   }
   
-  void retrieveMasakoData() {
-    dbRef.child('Masako').onChildAdded.listen((data) {
-      MasakoData masakoData = MasakoData.fromJson(data.snapshot.value as Map);
-      Masako masako = Masako(key: data.snapshot.key, masakoData: masakoData);
-      masakoList.add(masako);
-      setState(() {});
-    });
-  }
+  // void retrieveMasakoData() {
+  //   dbRef.child('Masako').onChildAdded.listen((data) {
+  //     MasakoData masakoData = MasakoData.fromJson(data.snapshot.value as Map);
+  //     Masako masako = Masako(key: data.snapshot.key, masakoData: masakoData);
+  //     masakoList.add(masako);
+  //     setState(() {});
+  //   });
+  // }
   
   Widget masakoWidget(Masako masakoList) {
     return Container(
@@ -164,11 +164,11 @@ class _MasakoScreenState extends State<MasakoScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Produksi Produk\t : ${masakoList.masakoData!.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Expired Produk\t\t\t\t: ${masakoList.masakoData!.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${masakoList.masakoData!.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Tanggal Produksi Produk\t : ${masakoList.masakoData!.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  // Text('Tanggal Expired Produk\t\t\t\t: ${masakoList.masakoData!.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
                 ],
               ),
             ],
@@ -184,13 +184,13 @@ class _MasakoScreenState extends State<MasakoScreen> {
               children: [
                 InkWell(
                   onTap: (){
-                    namaController.text = masakoList.masakoData.nama!;
-                    beratController.text = masakoList.masakoData.berat!;
-                    jumlahController.text = masakoList.masakoData.jumlah!;
-                    produksiController.text = masakoList.masakoData.tanggalProduksi!;
-                    expiredController.text = masakoList.masakoData.tanggalExpired!;
-                    deleteMasakoData = true;
-                    deletemasakoDialog(key: masakoList.key);
+                    // namaController.text = masakoList.masakoData.nama!;
+                    // beratController.text = masakoList.masakoData.berat!;
+                    // jumlahController.text = masakoList.masakoData.jumlah!;
+                    // produksiController.text = masakoList.masakoData.tanggalProduksi!;
+                    // expiredController.text = masakoList.masakoData.tanggalExpired!;
+                    // deleteMasakoData = true;
+                    // deletemasakoDialog(key: masakoList.key);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(5),
@@ -210,13 +210,13 @@ class _MasakoScreenState extends State<MasakoScreen> {
                 ),
                 InkWell(
                   onTap: (){
-                    namaController.text = masakoList.masakoData.nama!;
-                    beratController.text = masakoList.masakoData.berat!;
-                    jumlahController.text = masakoList.masakoData.jumlah!;
-                    produksiController.text = masakoList.masakoData.tanggalProduksi!;
-                    expiredController.text = masakoList.masakoData.tanggalExpired!;
-                    updateMasakoData = true;
-                    updatemasakoDialog(key: masakoList.key);
+                    // namaController.text = masakoList.masakoData.nama!;
+                    // beratController.text = masakoList.masakoData.berat!;
+                    // jumlahController.text = masakoList.masakoData.jumlah!;
+                    // produksiController.text = masakoList.masakoData.tanggalProduksi!;
+                    // expiredController.text = masakoList.masakoData.tanggalExpired!;
+                    // updateMasakoData = true;
+                    // updatemasakoDialog(key: masakoList.key);
                   },
                   child: Container(
                     padding: const EdgeInsets.all(5),
@@ -373,29 +373,29 @@ class _MasakoScreenState extends State<MasakoScreen> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Map<String, dynamic> masakodata = {
-                      'nama produk': namaController.text,
-                      'berat produk': beratController.text,
-                      'jumlah produk': jumlahController.text,
-                      'tanggal produksi': produksiController.text,
-                      'tanggal expired': expiredController.text,
-                    };
+                    // Map<String, dynamic> masakodata = {
+                    //   'nama produk': namaController.text,
+                    //   'berat produk': beratController.text,
+                    //   'jumlah produk': jumlahController.text,
+                    //   'tanggal produksi': produksiController.text,
+                    //   'tanggal expired': expiredController.text,
+                    // };
 
-                    if(updateMasakoData) {
-                      dbRefMasako.child('Masako').child(key!).update(masakodata).then((value) {
-                        int index = masakoList.indexWhere((element) => element.key == key);
-                        masakoList.removeAt(index);
-                        masakoList.insert(index, Masako(key: key, masakoData: MasakoData.fromJson(masakodata)));
-                        setState(() {
+                    // if(updateMasakoData) {
+                    //   dbRefMasako.child('Masako').child(key!).update(masakodata).then((value) {
+                    //     int index = masakoList.indexWhere((element) => element.key == key);
+                    //     masakoList.removeAt(index);
+                    //     masakoList.insert(index, Masako(key: key, masakoData: MasakoData.fromJson(masakodata)));
+                    //     setState(() {
                           
-                        });
-                        Navigator.of(context).pop();
-                      });
-                    } else {
-                      dbRefMasako.child('Masako').push().set(masakodata).then((value) {
-                      Navigator.of(context).pop();
-                    });
-                    }
+                    //     });
+                    //     Navigator.of(context).pop();
+                    //   });
+                    // } else {
+                    //   dbRefMasako.child('Masako').push().set(masakodata).then((value) {
+                    //   Navigator.of(context).pop();
+                    // });
+                    // }
                   },
                     style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
@@ -443,26 +443,26 @@ class _MasakoScreenState extends State<MasakoScreen> {
 
                   ElevatedButton(
                     onPressed: () {
-                      Map<String, dynamic> masakodata = {
-                        'nama produk': namaController.text,
-                        'berat produk': beratController.text,
-                        'jumlah produk': jumlahController.text,
-                        'tanggal produksi': produksiController.text,
-                        'tanggal expired': expiredController.text,
-                      };
+                      // Map<String, dynamic> masakodata = {
+                      //   'nama produk': namaController.text,
+                      //   'berat produk': beratController.text,
+                      //   'jumlah produk': jumlahController.text,
+                      //   'tanggal produksi': produksiController.text,
+                      //   'tanggal expired': expiredController.text,
+                      // };
 
-                      if(deleteMasakoData) {
-                        dbRefMasako.child('Masako').child(key!).remove().then((value) {
-                          int index = masakoList.indexWhere((element) => element.key == key);
-                          masakoList.removeAt(index);
-                          setState(() {});
-                          Navigator.of(context).pop();
-                        });
-                      } else {
-                        dbRefMasako.child('Masako').push().set(masakodata).then((value) {
-                        Navigator.of(context).pop();
-                      });
-                      }
+                      // if(deleteMasakoData) {
+                      //   dbRefMasako.child('Masako').child(key!).remove().then((value) {
+                      //     int index = masakoList.indexWhere((element) => element.key == key);
+                      //     masakoList.removeAt(index);
+                      //     setState(() {});
+                      //     Navigator.of(context).pop();
+                      //   });
+                      // } else {
+                      //   dbRefMasako.child('Masako').push().set(masakodata).then((value) {
+                      //   Navigator.of(context).pop();
+                      // });
+                      // }
                     },
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
