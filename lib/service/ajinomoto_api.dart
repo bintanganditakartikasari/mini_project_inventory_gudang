@@ -8,33 +8,39 @@ class AjinomotoAPI {
   static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Ajinomoto';
   // final Dio _dio = Dio();
 
-  static Future<List<Ajinomoto>> getAjinomoto() async {
+  Future<List<Ajinomoto>> getAjinomoto() async {
     final prefs = await SharedPreferences.getInstance();
     if(!prefs.containsKey('Ajinomoto')){
       return [];
     }
 
-    // List<Ajinomoto> data = [];
-    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    List<Ajinomoto> data = [];
+    final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
     try {
       final response = await Dio().get(baseURL);
-      var value;
-      var key;
-      
-      List<Ajinomoto> ajinomoto = (response.data as List).map((ajinomoto) => Ajinomoto(
-        id: key.toString(), 
-        nama: value['nama produk'].toString(), 
-        berat: value['berat produk'].toString(), 
-        jumlah: value['jumlah produk'].toString(), 
-        tanggalProduksi: value['tanggal produksi'].toString(), 
-        tanggalExpired: value['tanggal expired'].toString()
-        ),
-      ).toList();
-
-      return ajinomoto;
+      if (response.data != null && response.data.isNotEmpty) {
+      final extractedData = response.data as Map<String, dynamic>;
+      if(extractedData.isEmpty) {
+        return [];
+      }
+      extractedData.forEach((key, value) {
+        data.add(
+          Ajinomoto(
+            id: key.toString(),
+            nama: value['nama produk'].toString(),
+            berat: value['berat produk'].toString(),
+            jumlah: value['jumlah produk'].toString(),
+            tanggalProduksi: value['tanggal produksi'].toString(),
+            tanggalExpired: value['tanggal expired'].toString(),
+          ),
+        );
+      });
+    } 
     } catch (e) {
       rethrow;
-    }}
+    }
+    return data;
+  }
       // if (response.data != null && response.data.isNotEmpty) {
       // final extractedData = response.data as Map<String, dynamic>;
       // if(extractedData.isEmpty) {

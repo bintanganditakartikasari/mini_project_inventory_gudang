@@ -15,9 +15,9 @@ class AjinomotoViewModel with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<void> getAjinomotoData() async {
+  Future<void> getSajikuData() async {
     try {
-      final result = await AjinomotoAPI.getAjinomoto();
+      final result = await AjinomotoAPI().getAjinomoto();
       result.sort(
         ((a, b) => a.tanggalProduksi.toString().compareTo(b.tanggalProduksi.toString()))
       );

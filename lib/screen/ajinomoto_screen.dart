@@ -20,10 +20,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
 
-  DatabaseReference dbRef = FirebaseDatabase.instance.ref();
-
-  DatabaseReference dbRefAjinomoto = FirebaseDatabase.instance.ref();
-
   bool updateAjinomotoData = false;
 
   bool deleteAjinomotoData = false;

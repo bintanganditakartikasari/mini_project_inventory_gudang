@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mini_project_inventory_gudang/models/Masako_model.dart';
+import 'package:mini_project_inventory_gudang/models/Mayumi_model.dart';
 
-class MasakoProduk extends StatelessWidget {
-  final Masako data;
-   const MasakoProduk(this.data, {Key? key}) : super(key: key);
+class MayumiProduk extends StatelessWidget {
+  final Mayumi dataMayumi;
+   const MayumiProduk(this.dataMayumi, {Key? key}) : super(key: key);
    
      @override
      Widget build(Object context) {
@@ -25,11 +25,11 @@ class MasakoProduk extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nama Produk: ${data.nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Berat Produk: ${data.berat}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Jumlah Produk: ${data.jumlah}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Produksi Produk: ${data.tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Expired Produk: ${data.tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Nama Produk: ${dataMayumi.nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Berat Produk: ${dataMayumi.berat}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Jumlah Produk: ${dataMayumi.jumlah}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Tanggal Produksi Produk: ${dataMayumi.tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Tanggal Expired Produk: ${dataMayumi.tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
                 ],
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/provider/provider_theme.dart';
 import 'package:mini_project_inventory_gudang/screen/ajinomoto_screen.dart';
+import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_masako.dart';
 import 'package:mini_project_inventory_gudang/screen/masako_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/mayumi_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/sajiku_screen.dart';
@@ -92,32 +93,27 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             InkWell(
               child: Container(
-                width: 250,
                 height: 250,
-                child: Container(
-                  child: Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/image_02.png'),
-                          fit: BoxFit.cover,
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.grey,
-                            spreadRadius: 2,
-                            blurRadius: 15,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                    ),
+                width: 250,
+                margin: const EdgeInsets.all(0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/image_02.png'),
+                    fit: BoxFit.cover,
                   ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 2,
+                      blurRadius: 15,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
               ),
               onTap: (){
+                // Navigator.of(context).pushNamed(MasakoEntryScreen.routeName);
                 Navigator.of(context).push(PageRouteBuilder(
                   reverseTransitionDuration: const Duration(milliseconds: 500),
                   transitionDuration: const Duration(milliseconds: 500),
@@ -141,29 +137,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             InkWell(
               child: Container(
-                width: 250,
                 height: 250,
-                child: Container(
-                  child: Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/image_06.png'),
-                          fit: BoxFit.cover,
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.grey,
-                            spreadRadius: 2,
-                            blurRadius: 15,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                    ),
+                width: 250,
+                margin: const EdgeInsets.all(0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/image_06.png'),
+                    fit: BoxFit.cover,
                   ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 2,
+                      blurRadius: 15,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
               ),
               onTap: (){
@@ -190,29 +180,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             InkWell(
               child: Container(
-                width: 250,
                 height: 250,
-                child: Container(
-                  child: Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/image_04.png'),
-                          fit: BoxFit.cover,
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.grey,
-                            spreadRadius: 2,
-                            blurRadius: 15,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                    ),
+                width: 250,
+                margin: const EdgeInsets.all(0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/image_04.png'),
+                    fit: BoxFit.cover,
                   ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 2,
+                      blurRadius: 15,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
               ),
               onTap: (){
@@ -239,29 +223,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             InkWell(
               child: Container(
-                width: 250,
                 height: 250,
-                child: Container(
-                  child: Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.all(0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/image_05.png'),
-                          fit: BoxFit.cover,
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.grey,
-                            spreadRadius: 2,
-                            blurRadius: 15,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                    ),
+                width: 250,
+                margin: const EdgeInsets.all(0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/image_05.png'),
+                    fit: BoxFit.cover,
                   ),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      spreadRadius: 2,
+                      blurRadius: 15,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
               ),
               onTap: (){

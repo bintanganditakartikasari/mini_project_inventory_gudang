@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "2914833194",
+    "firebase_url": "https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cloudminiproject-inventory",
+    "storage_bucket": "cloudminiproject-inventory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2914833194:android:c6a87719870f492ce60453",
+        "android_client_info": {
+          "package_name": "com.example.mini_project_inventory_gudang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2914833194-b9oubkhirgdm26vhns70j68s6767h9ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS6O-R4S2jyAprZGMD6vRl7vrQ1WuNLfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2914833194-b9oubkhirgdm26vhns70j68s6767h9ep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

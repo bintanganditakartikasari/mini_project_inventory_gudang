@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mini_project_inventory_gudang/models/Masako_model.dart';
 import 'package:mini_project_inventory_gudang/service/Masako_api.dart';
-import 'package:flutter/material.dart';
 
 class MasakoViewModel with ChangeNotifier {
   List<Masako> _masako = [];

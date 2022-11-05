@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/models/masako_model.dart';
 import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_masako.dart';
-import 'package:mini_project_inventory_gudang/screen/masako_produk.dart';
+import 'package:mini_project_inventory_gudang/widget/masako_produk.dart';
 import 'package:mini_project_inventory_gudang/view_model/masako_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +22,6 @@ class _MasakoScreenState extends State<MasakoScreen> {
   final jumlahController = TextEditingController();
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
-
-  DatabaseReference dbRef = FirebaseDatabase.instance.ref();
-
-  DatabaseReference dbRefMasako = FirebaseDatabase.instance.ref();
 
   List<Masako> masakoList = [];
 
