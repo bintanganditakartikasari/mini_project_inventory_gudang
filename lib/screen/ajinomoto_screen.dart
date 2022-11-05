@@ -40,56 +40,53 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
-              height: size.height * 0.3,
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    // padding: const EdgeInsets.only(left: 40, right: 20, bottom: 20),
-                    height: size.height * 0.3 - 40,
-                    decoration: const BoxDecoration(
-                      // color: Color.fromARGB(255, 116, 178, 181),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        colors: [
-                          Color.fromARGB(255, 21, 135, 105),
-                          Color.fromARGB(255, 48, 160, 143),
-                          Color.fromARGB(255, 121, 195, 185),
-                        ]
-                      ),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(40),
-                        bottomRight: Radius.circular(40),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(255, 87, 178, 183),
-                          spreadRadius: 2,
-                          blurRadius: 15,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
+            Stack(
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  // padding: const EdgeInsets.only(left: 40, right: 20, bottom: 20),
+                  height: size.height * 0.3 - 40,
+                  decoration: const BoxDecoration(
+                    // color: Color.fromARGB(255, 116, 178, 181),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      colors: [
+                        Color.fromARGB(255, 21, 135, 105),
+                        Color.fromARGB(255, 48, 160, 143),
+                        Color.fromARGB(255, 121, 195, 185),
+                      ]
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        const SizedBox(height: 65,),
-                        Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text('Inventory Gudang', style: GoogleFonts.poppins(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
-                              Text('Produk Ajinomoto', style: GoogleFonts.poppins(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),),
-                            ],
-                          ),
-                        ),
-                      ],
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(40),
+                      bottomRight: Radius.circular(40),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(255, 87, 178, 183),
+                        spreadRadius: 2,
+                        blurRadius: 15,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      const SizedBox(height: 65,),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('Inventory Gudang', style: GoogleFonts.poppins(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
+                            Text('Produk Ajinomoto', style: GoogleFonts.poppins(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             // Column(
             //   children: [

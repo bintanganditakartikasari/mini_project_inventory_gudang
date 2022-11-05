@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/provider/provider_theme.dart';
 import 'package:mini_project_inventory_gudang/screen/ajinomoto_screen.dart';
-import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_masako.dart';
 import 'package:mini_project_inventory_gudang/screen/masako_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/mayumi_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/sajiku_screen.dart';
@@ -23,73 +22,76 @@ class _HomeScreenState extends State<HomeScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Column(
           children: <Widget>[
-            Container(
-              height: size.height * 0.3,
-              child: Stack(
-                children: <Widget>[
-                  IconButton(
-                    onPressed: (){
-                      ThemeChanger themeChanger = Provider.of<ThemeChanger>(
-                        context,
-                        listen: false,
-                      );
-                      themeChanger.swapTheme();
-                    }, 
-                    icon: const Icon(Icons.brightness_6),
-                    color: Colors.white,
+            Stack(
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  // padding: const EdgeInsets.only(left: 40, right: 20, bottom: 20),
+                  height: size.height * 0.3 - 40,
+                  decoration: const BoxDecoration(
+                    // color: Color.fromARGB(255, 116, 178, 181),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      colors: [
+                        Color.fromARGB(255, 21, 135, 105),
+                        Color.fromARGB(255, 48, 160, 143),
+                        Color.fromARGB(255, 121, 195, 185),
+                      ]
+                    ),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(40),
+                      bottomRight: Radius.circular(40),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(255, 87, 178, 183),
+                        spreadRadius: 2,
+                        blurRadius: 15,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
                   ),
-                  Stack(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        // padding: const EdgeInsets.only(left: 40, right: 20, bottom: 20),
-                        height: size.height * 0.3 - 40,
-                        decoration: const BoxDecoration(
-                          // color: Color.fromARGB(255, 116, 178, 181),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            colors: [
-                              Color.fromARGB(255, 21, 135, 105),
-                              Color.fromARGB(255, 48, 160, 143),
-                              Color.fromARGB(255, 121, 195, 185),
-                            ]
-                          ),
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(40),
-                            bottomRight: Radius.circular(40),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color.fromARGB(255, 87, 178, 183),
-                              spreadRadius: 2,
-                              blurRadius: 15,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            const SizedBox(height: 65,),
-                            Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text('Inventory Gudang', style: GoogleFonts.poppins(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
-                                  Text('Pabrik Ajinomoto', style: GoogleFonts.poppins(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),),
-                                ],
-                              ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                  IconButton(
+                                  alignment: Alignment.topRight,
+                                  onPressed: (){
+                                    // ThemeChanger themeChanger = Provider.of<ThemeChanger>(
+                                    //   context,
+                                    //   listen: false,
+                                    // );
+                                    // themeChanger.swapTheme();
+                                  }, 
+                                  icon: const Icon(Icons.brightness_6),
+                                  color: Colors.white,
+                                ),
+                              ],
                             ),
+                            Text('Inventory Gudang', style: GoogleFonts.poppins(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
+                            Text('Pabrik Ajinomoto', style: GoogleFonts.poppins(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),),
                           ],
                         ),
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 40,
             ),
             InkWell(
               child: Container(
@@ -113,23 +115,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onTap: (){
-                // Navigator.of(context).pushNamed(MasakoEntryScreen.routeName);
-                Navigator.of(context).push(PageRouteBuilder(
-                  reverseTransitionDuration: const Duration(milliseconds: 500),
-                  transitionDuration: const Duration(milliseconds: 500),
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                  return const MasakoScreen();
-                },
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  final tween = Tween(
-                    begin: const Offset(-1, 0),
-                    end: Offset.zero,
-                  );
-                  return SlideTransition(
-                    position: animation.drive(tween),
-                    child: child,
-                  );
-                }),);
+                Navigator.of(context).pushNamed(MasakoScreen.routeName);
+                // Navigator.of(context).push(PageRouteBuilder(
+                //   reverseTransitionDuration: const Duration(milliseconds: 500),
+                //   transitionDuration: const Duration(milliseconds: 500),
+                //   pageBuilder: (context, animation, secondaryAnimation) {
+                //   return const MasakoScreen();
+                // },
+                // transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                //   final tween = Tween(
+                //     begin: const Offset(-1, 0),
+                //     end: Offset.zero,
+                //   );
+                //   return SlideTransition(
+                //     position: animation.drive(tween),
+                //     child: child,
+                //   );
+                // }),);
               },
             ),
             const SizedBox(
@@ -157,22 +159,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onTap: (){
-                Navigator.of(context).push(PageRouteBuilder(
-                  reverseTransitionDuration: const Duration(milliseconds: 500),
-                  transitionDuration: const Duration(milliseconds: 500),
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                  return const AjinomotoScreen();
-                },
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  final tween = Tween(
-                    begin: const Offset(-1, 0),
-                    end: Offset.zero,
-                  );
-                  return SlideTransition(
-                    position: animation.drive(tween),
-                    child: child,
-                  );
-                }),);
+                Navigator.of(context).pushNamed(AjinomotoScreen.routeName);
+                // Navigator.of(context).push(PageRouteBuilder(
+                //   reverseTransitionDuration: const Duration(milliseconds: 500),
+                //   transitionDuration: const Duration(milliseconds: 500),
+                //   pageBuilder: (context, animation, secondaryAnimation) {
+                //   return const AjinomotoScreen();
+                // },
+                // transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                //   final tween = Tween(
+                //     begin: const Offset(-1, 0),
+                //     end: Offset.zero,
+                //   );
+                //   return SlideTransition(
+                //     position: animation.drive(tween),
+                //     child: child,
+                //   );
+                // }),);
               },
             ),
             const SizedBox(
@@ -200,22 +203,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onTap: (){
-                Navigator.of(context).push(PageRouteBuilder(
-                  reverseTransitionDuration: const Duration(milliseconds: 500),
-                  transitionDuration: const Duration(milliseconds: 500),
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                  return const SajikuScreen();
-                },
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  final tween = Tween(
-                    begin: const Offset(-1, 0),
-                    end: Offset.zero,
-                  );
-                  return SlideTransition(
-                    position: animation.drive(tween),
-                    child: child,
-                  );
-                }),);
+                Navigator.of(context).pushNamed(SajikuScreen.routeName);
+                // Navigator.of(context).push(PageRouteBuilder(
+                //   reverseTransitionDuration: const Duration(milliseconds: 500),
+                //   transitionDuration: const Duration(milliseconds: 500),
+                //   pageBuilder: (context, animation, secondaryAnimation) {
+                //   return const SajikuScreen();
+                // },
+                // transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                //   final tween = Tween(
+                //     begin: const Offset(-1, 0),
+                //     end: Offset.zero,
+                //   );
+                //   return SlideTransition(
+                //     position: animation.drive(tween),
+                //     child: child,
+                //   );
+                // }),);
               },
             ),
             const SizedBox(
@@ -243,22 +247,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onTap: (){
-                Navigator.of(context).push(PageRouteBuilder(
-                  reverseTransitionDuration: const Duration(milliseconds: 500),
-                  transitionDuration: const Duration(milliseconds: 500),
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                  return const MayumiScreen();
-                },
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  final tween = Tween(
-                    begin: const Offset(-1, 0),
-                    end: Offset.zero,
-                  );
-                  return SlideTransition(
-                    position: animation.drive(tween),
-                    child: child,
-                  );
-                }),);
+                Navigator.of(context).pushNamed(MayumiScreen.routeName);
+                // Navigator.of(context).push(PageRouteBuilder(
+                //   reverseTransitionDuration: const Duration(milliseconds: 500),
+                //   transitionDuration: const Duration(milliseconds: 500),
+                //   pageBuilder: (context, animation, secondaryAnimation) {
+                //   return const MayumiScreen();
+                // },
+                // transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                //   final tween = Tween(
+                //     begin: const Offset(-1, 0),
+                //     end: Offset.zero,
+                //   );
+                //   return SlideTransition(
+                //     position: animation.drive(tween),
+                //     child: child,
+                //   );
+                // }),);
               },
             ),
             const SizedBox(

@@ -1,5 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mini_project_inventory_gudang/screen/ajinomoto_screen.dart';
+import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_ajinomoto.dart';
+import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_masako.dart';
+import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_mayumi.dart';
+import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_sajiku.dart';
 import 'package:mini_project_inventory_gudang/screen/home_screen.dart';
+import 'package:mini_project_inventory_gudang/screen/masako_screen.dart';
+import 'package:mini_project_inventory_gudang/screen/mayumi_screen.dart';
+import 'package:mini_project_inventory_gudang/screen/sajiku_screen.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project_inventory_gudang/view_model/ajinomoto_view_model.dart';
@@ -46,21 +54,21 @@ class MyApp extends StatelessWidget {
           create: (context) => SajikuViewModel(),
         ),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         initialRoute: HomeScreen.routeName,
-        // routes: {
-        //   HomeScreen.routeName:(context) => const HomeScreen(),
-        //   AjinomotoScreen.routeName:(context) => const AjinomotoScreen(),
-        //   MasakoScreen.routeName:(context) => const MasakoScreen(),
-        //   MayumiScreen.routeName:(context) => const MayumiScreen(),
-        //   SajikuScreen.routeName:(context) => const SajikuScreen(),
-        //   AjinomotoEntryScreen.routeName:(context) => const AjinomotoEntryScreen(),
-        //   MasakoEntryScreen.routeName:(context) => const MasakoEntryScreen(),
-        //   MayumiEntryScreen.routeName:(context) => const MayumiEntryScreen(),
-        //   SajikuEntryScreen.routeName:(context) => const SajikuEntryScreen(),
-        // },
+        routes: {
+          HomeScreen.routeName:(context) => const HomeScreen(),
+          AjinomotoScreen.routeName:(context) => const AjinomotoScreen(),
+          MasakoScreen.routeName:(context) => const MasakoScreen(),
+          MayumiScreen.routeName:(context) => const MayumiScreen(),
+          SajikuScreen.routeName:(context) => const SajikuScreen(),
+          AjinomotoEntryScreen.routeName:(context) => const AjinomotoEntryScreen(),
+          MasakoEntryScreen.routeName:(context) => const MasakoEntryScreen(),
+          MayumiEntryScreen.routeName:(context) => const MayumiEntryScreen(),
+          SajikuEntryScreen.routeName:(context) => const SajikuEntryScreen(),
+        },
       ),
       // child: Consumer<ThemeChanger>(
       //   builder: (context, value, child) {
