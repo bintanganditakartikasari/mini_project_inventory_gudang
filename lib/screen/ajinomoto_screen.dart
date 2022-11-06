@@ -33,6 +33,7 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
   //   retrieveAjinomotoData();
   // }
 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

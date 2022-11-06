@@ -96,7 +96,7 @@ class Masako {
   static List<Masako> masakoFromJson(String jsonData) {
     final data = jsonDecode(jsonData);
     return List<Masako>.from(
-      data['values'].map((item) => Masako.fromJson(item))
+      data['Masako'].map((item) => Masako.fromJson(item))
     );
   }
 

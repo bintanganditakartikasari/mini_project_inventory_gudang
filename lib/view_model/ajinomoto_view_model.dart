@@ -15,7 +15,7 @@ class AjinomotoViewModel with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<void> getSajikuData() async {
+  Future<void> getAjinomotoData() async {
     try {
       final result = await AjinomotoAPI().getAjinomoto();
       result.sort(

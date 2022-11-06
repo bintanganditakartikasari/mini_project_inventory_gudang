@@ -1,10 +1,14 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_project_inventory_gudang/models/ajinomoto_model.dart';
+import 'package:mini_project_inventory_gudang/view_model/ajinomoto_view_model.dart';
+import 'package:provider/provider.dart';
 
 class AjinomotoEntryScreen extends StatefulWidget {
   static const routeName = '/ajinomoto/new';
-  const AjinomotoEntryScreen({super.key});
+  final Ajinomoto? ajinomoto;
+
+  const AjinomotoEntryScreen({super.key, this.ajinomoto});
 
   @override
   State<AjinomotoEntryScreen> createState() => _AjinomotoEntryScreen();
@@ -18,12 +22,70 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
 
-  late DatabaseReference dbRefAjinomoto;
+  // late DatabaseReference dbRefAjinomoto;
+
+  // @override
+  // void initState(){
+  //   super.initState();
+  //   dbRefAjinomoto = FirebaseDatabase.instance.ref().child('Ajinomoto');
+  // }
 
   @override
   void initState(){
     super.initState();
-    dbRefAjinomoto = FirebaseDatabase.instance.ref().child('Ajinomoto');
+    if(widget.ajinomoto != null) {
+      final data = widget.ajinomoto!;
+      namaController.text = data.nama ?? '';
+      beratController.text = data.berat ?? '';
+      jumlahController.text = data.jumlah ?? '';
+      produksiController.text = data.tanggalProduksi ?? '';
+      expiredController.text = data.tanggalExpired ?? '';
+    }
+  }
+
+  Future<void> _submitDataAjinomoto() async {
+    if (namaController.text.isEmpty || 
+        beratController.text.isEmpty ||
+        jumlahController.text.isEmpty ||
+        produksiController.text.isEmpty ||
+        expiredController.text.isEmpty) {
+      return;    
+    }
+
+    final nama = namaController.text;
+    final berat = beratController.text;
+    final jumlah = jumlahController.text;
+    final tanggalProduksi = produksiController.text;
+    final tanggalExpired = expiredController.text;
+
+    try {
+      if (widget.ajinomoto != null) {
+        final data = widget.ajinomoto!;
+        final updateAjinomotoData = Ajinomoto(
+          id: data.id, 
+          nama: nama, 
+          berat: berat, 
+          jumlah: jumlah, 
+          tanggalProduksi: tanggalProduksi, 
+          tanggalExpired: tanggalExpired
+        );
+
+        await Provider.of<AjinomotoViewModel>(context, listen: false).updateAjinomoto(updateAjinomotoData);
+      } else {
+        final newAjinomoto = Ajinomoto(
+          nama: nama, 
+          berat: berat, 
+          jumlah: jumlah, 
+          tanggalProduksi: tanggalProduksi, 
+          tanggalExpired: tanggalExpired);
+
+          await Provider.of<AjinomotoViewModel>(context, listen: false).addAjinomoto(newAjinomoto);
+      }
+    } catch (error) {
+      return;
+    }
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
   }
 
   @override
@@ -112,6 +174,7 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: namaController,
+                      onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -136,6 +199,7 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: beratController,
+                      onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -160,6 +224,7 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: jumlahController,
+                      onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -184,6 +249,7 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: produksiController,
+                      onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -208,23 +274,14 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: expiredController,
+                      onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Center(
                       child: ElevatedButton(
-                        onPressed: (){
-                          Map<String, String> ajinomoto = {
-                            'nama produk': namaController.text,
-                            'jumlah produk': jumlahController.text,
-                            'berat produk': beratController.text,
-                            'tanggal produksi': produksiController.text,
-                            'tanggal expired': expiredController.text,
-                          };
-                          dbRefAjinomoto.push().set(ajinomoto);
-                          Navigator.of(context).pop();
-                        }, 
+                        onPressed: _submitDataAjinomoto,
                         style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
                         ),

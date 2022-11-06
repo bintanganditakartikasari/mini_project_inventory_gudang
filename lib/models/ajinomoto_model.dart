@@ -72,7 +72,7 @@ class Ajinomoto {
   String tanggalProduksi;
   String tanggalExpired;
 
-  Ajinomoto({required this.id, required this.nama, required this.berat, required this.jumlah, required this.tanggalProduksi, required this.tanggalExpired});
+  Ajinomoto({this.id, required this.nama, required this.berat, required this.jumlah, required this.tanggalProduksi, required this.tanggalExpired});
 
   factory Ajinomoto.fromJson(Map<String, dynamic> map) {
     return Ajinomoto(
@@ -104,7 +104,7 @@ class Ajinomoto {
   static List<Ajinomoto> ajinomotoFromJson(String jsonData) {
     final data = jsonDecode(jsonData);
     return List<Ajinomoto>.from(
-      data['values'].map((item) => Ajinomoto.fromJson(item))
+      data['Ajinomoto'].map((item) => Ajinomoto.fromJson(item))
     );
   }
 

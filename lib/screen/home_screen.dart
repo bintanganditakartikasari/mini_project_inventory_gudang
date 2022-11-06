@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mini_project_inventory_gudang/provider/provider_theme.dart';
 import 'package:mini_project_inventory_gudang/screen/ajinomoto_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/masako_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/mayumi_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/sajiku_screen.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -25,70 +23,69 @@ class _HomeScreenState extends State<HomeScreen> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  // padding: const EdgeInsets.only(left: 40, right: 20, bottom: 20),
-                  height: size.height * 0.3 - 40,
-                  decoration: const BoxDecoration(
-                    // color: Color.fromARGB(255, 116, 178, 181),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      colors: [
-                        Color.fromARGB(255, 21, 135, 105),
-                        Color.fromARGB(255, 48, 160, 143),
-                        Color.fromARGB(255, 121, 195, 185),
-                      ]
-                    ),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(40),
-                      bottomRight: Radius.circular(40),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(255, 87, 178, 183),
-                        spreadRadius: 2,
-                        blurRadius: 15,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                  IconButton(
-                                  alignment: Alignment.topRight,
-                                  onPressed: (){
-                                    // ThemeChanger themeChanger = Provider.of<ThemeChanger>(
-                                    //   context,
-                                    //   listen: false,
-                                    // );
-                                    // themeChanger.swapTheme();
-                                  }, 
-                                  icon: const Icon(Icons.brightness_6),
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-                            Text('Inventory Gudang', style: GoogleFonts.poppins(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
-                            Text('Pabrik Ajinomoto', style: GoogleFonts.poppins(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+            Container(
+              padding: const EdgeInsets.only(bottom: 20),
+              // padding: const EdgeInsets.only(left: 40, right: 20, bottom: 20),
+              height: size.height * 0.3 - 40,
+              decoration: const BoxDecoration(
+                // color: Color.fromARGB(255, 116, 178, 181),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  colors: [
+                    Color.fromARGB(255, 21, 135, 105),
+                    Color.fromARGB(255, 48, 160, 143),
+                    Color.fromARGB(255, 121, 195, 185),
+                  ]
                 ),
-              ],
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 87, 178, 183),
+                    spreadRadius: 2,
+                    blurRadius: 15,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 60,
+                        ),
+                        // Column(
+                        //   mainAxisAlignment: MainAxisAlignment.end,
+                        //   crossAxisAlignment: CrossAxisAlignment.end,
+                        //   children: [
+                        //       IconButton(
+                        //       alignment: Alignment.topRight,
+                        //       onPressed: (){
+                        //         // ThemeChanger themeChanger = Provider.of<ThemeChanger>(
+                        //         //   context,
+                        //         //   listen: false,
+                        //         // );
+                        //         // themeChanger.swapTheme();
+                        //       }, 
+                        //       icon: const Icon(Icons.brightness_6),
+                        //       color: Colors.white,
+                        //     ),
+                        //   ],
+                        // ),
+                        Text('Inventory Gudang', style: GoogleFonts.poppins(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
+                        Text('Pabrik Ajinomoto', style: GoogleFonts.poppins(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(
               height: 40,

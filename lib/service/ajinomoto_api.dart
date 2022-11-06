@@ -6,19 +6,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AjinomotoAPI {
   static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Ajinomoto';
-  // final Dio _dio = Dio();
+  final Dio _dio = Dio();
 
   Future<List<Ajinomoto>> getAjinomoto() async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Ajinomoto')){
-      return [];
-    }
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Ajinomoto')){
+    //   return [];
+    // }
 
     List<Ajinomoto> data = [];
-    final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    // String key = extractedAjinomotoData['key'];
     try {
-      final response = await Dio().get(baseURL);
-      if (response.data != null && response.data.isNotEmpty) {
+      final response = await _dio.get(baseURL);
+      if (response.data != null) {
       final extractedData = response.data as Map<String, dynamic>;
       if(extractedData.isEmpty) {
         return [];
@@ -41,26 +42,6 @@ class AjinomotoAPI {
     }
     return data;
   }
-      // if (response.data != null && response.data.isNotEmpty) {
-      // final extractedData = response.data as Map<String, dynamic>;
-      // if(extractedData.isEmpty) {
-      //   return [];
-      // }
-      // extractedData.forEach((key, value) {
-      //   data.add(
-      //     Ajinomoto(
-      //       id: key.toString(),
-      //       nama: value['nama produk'].toString(),
-      //       berat: value['berat produk'].toString(),
-      //       jumlah: value['jumlah produk'].toString(),
-      //       tanggalProduksi: value['tanggal produksi'].toString(),
-      //       tanggalExpired: value['tanggal expired'].toString(),
-      //     ),
-      //   );
-      // });
-    // } catch (e) {
-    //   rethrow;
-    // }}
   
 
   static Future<Ajinomoto?> addAjinomoto(Ajinomoto ajinomoto) async {

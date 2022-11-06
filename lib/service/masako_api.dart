@@ -5,7 +5,7 @@ import 'package:mini_project_inventory_gudang/models/Masako_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MasakoAPI {
-  static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Masako';
+  static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app';
   // final Dio _dio = Dio();
 
   // Future<List<Masako>> getMasako() async {
@@ -51,7 +51,7 @@ class MasakoAPI {
     List<Masako> data = [];
     final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
     try {
-      final response = await Dio().get(baseURL);
+      final response = await Dio().get('$baseURL/Masako');
       if (response.data != null && response.data.isNotEmpty) {
       final extractedData = response.data as Map<String, dynamic>;
       if(extractedData.isEmpty) {
