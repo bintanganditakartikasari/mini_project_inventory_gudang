@@ -26,7 +26,7 @@ class AjinomotoProduk extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Nama Produk: ${dataAjinomoto.nama.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Berat Produk: $dataAjinomoto.berat.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Berat Produk: ${dataAjinomoto.berat.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
                   Text('Jumlah Produk: ${dataAjinomoto.jumlah.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
                   Text('Tanggal Produksi Produk: ${dataAjinomoto.tanggalProduksi.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
                   Text('Tanggal Expired Produk: ${dataAjinomoto.tanggalExpired.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
