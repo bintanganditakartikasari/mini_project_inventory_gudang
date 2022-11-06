@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:mini_project_inventory_gudang/models/Masako_model.dart';
-import 'package:mini_project_inventory_gudang/service/Masako_api.dart';
+import 'package:mini_project_inventory_gudang/service/masako_api.dart';
 
 class MasakoViewModel with ChangeNotifier {
   List<Masako> _masako = [];
@@ -9,15 +9,13 @@ class MasakoViewModel with ChangeNotifier {
     return [..._masako];
   }
 
-  // getMasakoData() async {
-  //   final masakoData = await MasakoAPI.getMasako();
-  //   _masako = masakoData;
-  //   notifyListeners();
-  // }
+  MasakoViewModel() {
+    getMasakoData();
+  }
 
   Future<void> getMasakoData() async {
     try {
-      final result = await MasakoAPI.getMasako();
+      final result = await MasakoAPI().getMasako();
       result.sort(
         ((a, b) => a.tanggalProduksi.toString().compareTo(b.tanggalProduksi.toString()))
       );
@@ -27,19 +25,6 @@ class MasakoViewModel with ChangeNotifier {
       rethrow;
     }
   }
-
-  // Future<void> getMasakoData() async {
-  //   try {
-  //     final result = await MasakoAPI.getMasako();
-  //     result.sort(
-  //       ((a, b) => a.tanggalProduksi.toString().compareTo(b.tanggalProduksi.toString()))
-  //     );
-  //     _masako = result;
-  //     notifyListeners();
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
 
   Future<void> addMasako(Masako newMasako) async {
     try{

@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/models/ajinomoto_model.dart';
 import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_ajinomoto.dart';
 import 'package:mini_project_inventory_gudang/view_model/ajinomoto_view_model.dart';
-import 'package:mini_project_inventory_gudang/widget/ajinomoto_produk.dart';
 import 'package:provider/provider.dart';
 
 class AjinomotoScreen extends StatefulWidget {
@@ -27,7 +26,7 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final ajinomoto = Provider.of<AjinomotoViewModel>(context).ajinomoto;
+    var dataAjinomoto = Provider.of<AjinomotoViewModel>(context);
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -78,18 +77,96 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
             ),
           ),
           Expanded(
-          child: ListView.separated(
-            itemBuilder: (context, value) => AjinomotoProduk(
-              ajinomoto[value],
-              key: Key(
-                ajinomoto[value].id!.toString(),
+            child: ListView.separated(
+              itemCount: dataAjinomoto.ajinomoto.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  height: 120,
+                  padding: const EdgeInsets.all(10),
+                  margin:  const EdgeInsets.only(top: 20, left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color.fromARGB(255, 48, 160, 143), width: 2),
+                  ),
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Nama Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Berat Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].berat} gr', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Jumlah Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].jumlah} pcs', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Tanggal Produksi Produk  : ${dataAjinomoto.ajinomoto[index].tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Tanggal Expired Produk \t\t\t: ${dataAjinomoto.ajinomoto[index].tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                        ],
+                      ),
+                      const Spacer(),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: (){},
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(255, 48, 160, 143),
+                                      borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: const Icon(
+                                      Icons.delete, 
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: (){},
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(255, 48, 160, 143),
+                                      borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: const Icon(
+                                      Icons.edit, 
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ), 
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) => const SizedBox(
+                height: 10,
               ),
-            ), 
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 10,
-            ), 
-            itemCount: ajinomoto.length),
-        )
+            ),
+          )
         ],
       ),
       floatingActionButton: Column(

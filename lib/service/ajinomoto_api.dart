@@ -9,14 +9,13 @@ class AjinomotoAPI {
   final Dio _dio = Dio();
 
   Future<List<Ajinomoto>> getAjinomoto() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Ajinomoto')){
-    //   return [];
-    // }
+    final prefs = await SharedPreferences.getInstance();
+    if(!prefs.containsKey('Ajinomoto')){
+      return [];
+    }
 
     List<Ajinomoto> data = [];
-    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
-    // String key = extractedAjinomotoData['key'];
+    
     try {
       final response = await _dio.get(baseURL);
       if (response.data != null) {

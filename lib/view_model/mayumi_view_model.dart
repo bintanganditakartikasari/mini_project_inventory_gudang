@@ -10,11 +10,9 @@ class MayumiViewModel with ChangeNotifier {
     return [..._mayumi];
   }
 
-  // getMayumiData() async {
-  //   final mayumiData = await MayumiAPI.getMayumi();
-  //   _mayumi = mayumiData;
-  //   notifyListeners();
-  // }
+  MayumiViewModel() {
+    getMayumiData();
+  }
 
   Future<void> getMayumiData() async {
     try {

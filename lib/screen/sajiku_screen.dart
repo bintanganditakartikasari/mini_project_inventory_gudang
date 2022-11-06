@@ -1,10 +1,7 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mini_project_inventory_gudang/models/sajiku_model.dart';
 import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_sajiku.dart';
 import 'package:mini_project_inventory_gudang/view_model/sajiku_view_model.dart';
-import 'package:mini_project_inventory_gudang/widget/sajiku_produk.dart';
 import 'package:provider/provider.dart';
 
 class SajikuScreen extends StatefulWidget {
@@ -23,26 +20,11 @@ class _SajikuScreenState extends State<SajikuScreen> {
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
 
-  DatabaseReference dbRef = FirebaseDatabase.instance.ref();
-
-  DatabaseReference dbRefSajiku = FirebaseDatabase.instance.ref();
-
-  bool updateSajikuData = false;
-
-  bool deleteSajikuData = false;
-
-  List<Sajiku> sajikuList = [];
-
-  // @override
-  // void initState(){
-  //   super.initState();
-
-  //   retrieveSajikuData();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    final sajiku = Provider.of<SajikuViewModel>(context).sajiku;
+
+    var dataSajikuSajiku = Provider.of<SajikuViewModel>(context);
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
@@ -93,16 +75,94 @@ class _SajikuScreenState extends State<SajikuScreen> {
           ),
           Expanded(
             child: ListView.separated(
-              itemBuilder: (context, index) => SajikuProduk(
-                sajiku[index],
-                key: Key(
-                  sajiku[index].id.toString(),
-                ),
-              ), 
-              separatorBuilder: (context, index) => const SizedBox(
+              itemCount: dataSajikuSajiku.sajiku.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  height: 120,
+                  padding: const EdgeInsets.all(10),
+                  margin:  const EdgeInsets.only(top: 20, left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color.fromARGB(255, 48, 160, 143), width: 2),
+                  ),
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Nama Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataSajikuSajiku.sajiku[index].nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Berat Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataSajikuSajiku.sajiku[index].berat} gr', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Jumlah Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataSajikuSajiku.sajiku[index].jumlah} pcs', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Tanggal Produksi Produk  : ${dataSajikuSajiku.sajiku[index].tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Tanggal Expired Produk \t\t\t: ${dataSajikuSajiku.sajiku[index].tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                        ],
+                      ),
+                      const Spacer(),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: (){},
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(255, 48, 160, 143),
+                                      borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: const Icon(
+                                      Icons.delete, 
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: (){},
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(255, 48, 160, 143),
+                                      borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: const Icon(
+                                      Icons.edit, 
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ), 
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) => const SizedBox(
                 height: 10,
-              ), 
-              itemCount: sajiku.length),
+              ),
+            ),
           )
         ],
       ),
@@ -136,347 +196,4 @@ class _SajikuScreenState extends State<SajikuScreen> {
       ),
     );
   }
-  
-  // void retrieveSajikuData() {
-  //   dbRef.child('Sajiku').onChildAdded.listen((data) {
-  //     SajikuData sajikuData = SajikuData.fromJson(data.snapshot.value as Map);
-  //     Sajiku sajiku = Sajiku(key: data.snapshot.key, sajikuData: sajikuData);
-  //     sajikuList.add(sajiku);
-  //     setState(() {});
-  //   });
-  // }
-  
-  // Widget sajikuWidget(Sajiku sajikuList) {
-  //   return Container(
-  //     width: MediaQuery.of(context).size.width,
-  //     height: 170,
-  //     padding: const EdgeInsets.all(10),
-  //     margin:  const EdgeInsets.only(top: 20, left: 20, right: 20),
-  //     decoration: BoxDecoration(
-  //       color: Colors.white,
-  //       borderRadius: BorderRadius.circular(10),
-  //       border: Border.all(color: const Color.fromARGB(255, 48, 160, 143), width: 2),
-  //     ),
-  //     child: Column(
-  //       children: [
-  //         Row(
-  //           children: [
-  //             Column(
-  //               mainAxisAlignment: MainAxisAlignment.start,
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: [
-  //                 // Text('Nama Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${sajikuList.sajikuData!.nama!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-  //                 // Text('Berat Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${sajikuList.sajikuData!.berat!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-  //                 // Text('Jumlah Produk\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${sajikuList.sajikuData!.jumlah!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-  //                 // Text('Tanggal Produksi Produk\t : ${sajikuList.sajikuData!.tanggalProduksi!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-  //                 // Text('Tanggal Expired Produk\t\t\t\t: ${sajikuList.sajikuData!.tanggalExpired!}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-  //               ],
-  //             ),
-  //           ],
-  //         ),
-  //         const SizedBox(
-  //           height: 5,
-  //         ),
-  //         Container(
-  //           padding: const EdgeInsets.all(5),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.center,
-  //             crossAxisAlignment: CrossAxisAlignment.center,
-  //             children: [
-  //               InkWell(
-  //                 onTap: (){
-  //                   // namaController.text = sajikuList.sajikuData.nama!;
-  //                   // beratController.text = sajikuList.sajikuData.berat!;
-  //                   // jumlahController.text = sajikuList.sajikuData.jumlah!;
-  //                   // produksiController.text = sajikuList.sajikuData.tanggalProduksi!;
-  //                   // expiredController.text = sajikuList.sajikuData.tanggalExpired!;
-  //                   // deleteSajikuData = true;
-  //                   // deletesajikuDialog(key: sajikuList.key);
-  //                 },
-  //                 child: Container(
-  //                   padding: const EdgeInsets.all(5),
-  //                   decoration: BoxDecoration(
-  //                     color: const Color.fromARGB(255, 48, 160, 143),
-  //                     borderRadius: BorderRadius.circular(50)
-  //                   ),
-  //                   child: const Icon(
-  //                     Icons.delete, 
-  //                     size: 25,
-  //                     color: Colors.white,
-  //                   ),
-  //                 ),
-  //               ),
-  //               const SizedBox(
-  //                 width: 10,
-  //               ),
-  //               InkWell(
-  //                 onTap: (){
-  //                   // namaController.text = sajikuList.sajikuData.nama!;
-  //                   // beratController.text = sajikuList.sajikuData.berat!;
-  //                   // jumlahController.text = sajikuList.sajikuData.jumlah!;
-  //                   // produksiController.text = sajikuList.sajikuData.tanggalProduksi!;
-  //                   // expiredController.text = sajikuList.sajikuData.tanggalExpired!;
-  //                   // updateSajikuData = true;
-  //                   // updatesajikuDialog(key:sajikuList.key);
-  //                 },
-  //                 child: Container(
-  //                   padding: const EdgeInsets.all(5),
-  //                   decoration: BoxDecoration(
-  //                     color: const Color.fromARGB(255, 48, 160, 143),
-  //                     borderRadius: BorderRadius.circular(50)
-  //                   ),
-  //                   child: const Icon(
-  //                     Icons.edit, 
-  //                     size: 25,
-  //                     color: Colors.white,
-  //                   ),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // void updatesajikuDialog({String? key}) async {
-  //   showDialog(
-  //     context: context, 
-  //     builder: (context) {
-  //     return Dialog(
-  //       child: Container(
-  //         // height: 413,
-  //         padding: const EdgeInsets.all(10),
-  //         child: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             TextFormField(
-  //               decoration: InputDecoration(
-  //                 enabledBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 focusedBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 prefixIcon: const Icon(
-  //                   Icons.inventory_2,
-  //                   color: Color.fromARGB(255, 48, 160, 143),
-  //                 ),
-  //                   hintText: 'Nama Produk',
-  //                   hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-  //                   filled: true,
-  //                   fillColor: Colors.white,
-  //                ),
-  //                controller: namaController,
-  //             ),
-  //             const SizedBox(
-  //               height: 10,
-  //             ),
-  //             TextFormField(
-  //               decoration: InputDecoration(
-  //                 enabledBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 focusedBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 prefixIcon: const Icon(
-  //                   Icons.note_add_outlined,
-  //                   color: Color.fromARGB(255, 48, 160, 143),
-  //                 ),
-  //                   hintText: 'Berat Bersih Produk',
-  //                   hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-  //                   filled: true,
-  //                   fillColor: Colors.white,
-  //                ),
-  //                controller: beratController,
-  //             ),
-  //             const SizedBox(
-  //               height: 10,
-  //             ),
-  //             TextFormField(
-  //               decoration: InputDecoration(
-  //                 enabledBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 focusedBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 prefixIcon: const Icon(
-  //                   Icons.add_circle_outline_rounded,
-  //                   color: Color.fromARGB(255, 48, 160, 143),
-  //                 ),
-  //                   hintText: 'Jumlah Produk',
-  //                   hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-  //                   filled: true,
-  //                   fillColor: Colors.white,
-  //                ),
-  //                controller: jumlahController,
-  //             ),
-  //             const SizedBox(
-  //               height: 10,
-  //             ),
-  //             TextFormField(
-  //               decoration: InputDecoration(
-  //                 enabledBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 focusedBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 prefixIcon: const Icon(
-  //                   Icons.date_range,
-  //                   color: Color.fromARGB(255, 48, 160, 143),
-  //                 ),
-  //                   hintText: 'Tanggal Produksi Produk',
-  //                   hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-  //                   filled: true,
-  //                   fillColor: Colors.white,
-  //                ),
-  //                controller: produksiController,
-  //             ),
-  //             const SizedBox(
-  //               height: 10,
-  //             ),
-  //             TextFormField(
-  //               decoration: InputDecoration(
-  //                 enabledBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 focusedBorder: OutlineInputBorder(
-  //                   borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-  //                   borderRadius: BorderRadius.circular(6),
-  //                 ),
-  //                 prefixIcon: const Icon(
-  //                   Icons.date_range,
-  //                   color: Color.fromARGB(255, 48, 160, 143),
-  //                 ),
-  //                   hintText: 'Tanggal Expired Produk',
-  //                   hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-  //                   filled: true,
-  //                   fillColor: Colors.white,
-  //                ),
-  //                controller: expiredController,
-  //             ),
-  //             const SizedBox(
-  //               height: 10,
-  //             ),
-  //             Center(
-  //               child: ElevatedButton(
-  //                 onPressed: () {
-  //                   // Map<String, dynamic> sajikudata = {
-  //                   //   'nama produk': namaController.text,
-  //                   //   'berat produk': beratController.text,
-  //                   //   'jumlah produk': jumlahController.text,
-  //                   //   'tanggal produksi': produksiController.text,
-  //                   //   'tanggal expired': expiredController.text,
-  //                   // };
-
-  //                   // if(updateSajikuData) {
-  //                   //   dbRefSajiku.child('Sajiku').child(key!).update(sajikudata).then((value) {
-  //                   //     int index = sajikuList.indexWhere((element) => element.key == key);
-  //                   //     sajikuList.removeAt(index);
-  //                   //     sajikuList.insert(index, Sajiku(key: key, sajikuData: SajikuData.fromJson(sajikudata)));
-  //                   //     setState(() {
-                          
-  //                   //     });
-  //                   //     Navigator.of(context).pop();
-  //                   //   });
-  //                   // } else {
-  //                   //   dbRefSajiku.child('Sajiku').push().set(sajikudata).then((value) {
-  //                   //   Navigator.of(context).pop();
-  //                   // });
-  //                   // }
-  //                 },
-  //                   style: const ButtonStyle(
-  //                     backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
-  //                   ),
-  //                   child: const Text('Update Produk', style: TextStyle(fontSize: 15),
-  //                 ),
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     );
-  //   });
-  // }
-
-  // void deletesajikuDialog({String? key}) async {
-  //   showDialog(
-  //     context: context, 
-  //     builder: (context) {
-  //     return Dialog(
-  //       child: Container(
-  //         // height: 413,
-  //         padding: const EdgeInsets.all(10),
-  //         child: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Center(
-  //               child: Text('Apakah anda yakin?', style: GoogleFonts.poppins(fontSize: 15, color: Colors.black)),
-  //             ),
-  //             const SizedBox(
-  //               height: 10,
-  //             ),
-  //             Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //               crossAxisAlignment: CrossAxisAlignment.center,
-  //               children: [
-  //                 ElevatedButton(
-  //                   onPressed: (){
-  //                     Navigator.of(context).pop();
-  //                   }, 
-  //                   style: const ButtonStyle(
-  //                     backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
-  //                   ),
-  //                   child: const Text('Cancel', style: TextStyle(fontSize: 15))),
-
-  //                 ElevatedButton(
-  //                   onPressed: () {
-  //                     // Map<String, dynamic> sajikudata = {
-  //                     //   'nama produk': namaController.text,
-  //                     //   'berat produk': beratController.text,
-  //                     //   'jumlah produk': jumlahController.text,
-  //                     //   'tanggal produksi': produksiController.text,
-  //                     //   'tanggal expired': expiredController.text,
-  //                     // };
-
-  //                     // if(deleteSajikuData) {
-  //                     //   dbRefSajiku.child('Ajinomoto').child(key!).remove().then((value) {
-  //                     //     int index = sajikuList.indexWhere((element) => element.key == key);
-  //                     //     sajikuList.removeAt(index);
-  //                     //     setState(() {});
-  //                     //     Navigator.of(context).pop();
-  //                     //   });
-  //                     // } else {
-  //                     //   dbRefSajiku.child('Sajiku').push().set(sajikudata).then((value) {
-  //                     //   Navigator.of(context).pop();
-  //                     // });
-  //                     // }
-  //                   },
-  //                     style: const ButtonStyle(
-  //                       backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
-  //                     ),
-  //                     child: const Text('Delete Produk', style: TextStyle(fontSize: 15),
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     );
-  //   });
-  // }
 }

@@ -10,11 +10,9 @@ class SajikuViewModel with ChangeNotifier {
     return [..._sajiku];
   }
 
-  // getSajikuData() async {
-  //   final sajikuData = await SajikuAPI.getSajiku();
-  //   _sajiku = sajikuData;
-  //   notifyListeners();
-  // }
+  SajikuViewModel() {
+    getSajikuData();
+  }
 
   Future<void> getSajikuData() async {
     try {

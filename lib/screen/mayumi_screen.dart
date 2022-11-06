@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mini_project_inventory_gudang/models/mayumi_model.dart';
 import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_mayumi.dart';
 import 'package:mini_project_inventory_gudang/view_model/mayumi_view_model.dart';
-import 'package:mini_project_inventory_gudang/widget/mayumi_produk.dart';
 import 'package:provider/provider.dart';
 
 class MayumiScreen extends StatefulWidget {
@@ -22,26 +20,11 @@ class _MayumiScreenState extends State<MayumiScreen> {
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
 
-  // DatabaseReference dbRef = FirebaseDatabase.instance.ref();
-
-  // DatabaseReference dbRefMayumi = FirebaseDatabase.instance.ref();
-
-  List<Mayumi> mayumiList = [];
-
-  // bool updateMayumiData = false;
-
-  // bool deleteMayumiData = false;
-
-  // @override
-  // void initState(){
-  //   super.initState();
-
-  //   retrieveMayumiData();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    final mayumi = Provider.of<MayumiViewModel>(context).mayumi;
+
+    var dataMayumi = Provider.of<MayumiViewModel>(context);
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
@@ -92,16 +75,94 @@ class _MayumiScreenState extends State<MayumiScreen> {
           ),
           Expanded(
             child: ListView.separated(
-              itemBuilder: (context, index) => MayumiProduk(
-                mayumi[index],
-                key: Key(
-                  mayumi[index].id.toString(),
-                ),
-              ), 
-              separatorBuilder: (context, index) => const SizedBox(
+              itemCount: dataMayumi.mayumi.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  height: 120,
+                  padding: const EdgeInsets.all(10),
+                  margin:  const EdgeInsets.only(top: 20, left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color.fromARGB(255, 48, 160, 143), width: 2),
+                  ),
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Nama Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataMayumi.mayumi[index].nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Berat Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataMayumi.mayumi[index].berat} gr', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Jumlah Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataMayumi.mayumi[index].jumlah} pcs', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Tanggal Produksi Produk  : ${dataMayumi.mayumi[index].tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Text('Tanggal Expired Produk \t\t\t: ${dataMayumi.mayumi[index].tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                        ],
+                      ),
+                      const Spacer(),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: (){},
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(255, 48, 160, 143),
+                                      borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: const Icon(
+                                      Icons.delete, 
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: (){},
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(255, 48, 160, 143),
+                                      borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: const Icon(
+                                      Icons.edit, 
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ), 
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) => const SizedBox(
                 height: 10,
-              ), 
-              itemCount: mayumi.length),
+              ),
+            ),
           )
         ],
       ),
@@ -137,9 +198,9 @@ class _MayumiScreenState extends State<MayumiScreen> {
   }
   
   // void retrieveMayumiData() {
-  //   dbRef.child('Mayumi').onChildAdded.listen((data) {
-  //     MayumiData mayumiData = MayumiData.fromJson(data.snapshot.value as Map);
-  //     Mayumi mayumi = Mayumi(key: data.snapshot.key, mayumiData: mayumiData);
+  //   dbRef.child('Mayumi').onChildAdded.listen((dataMayumi) {
+  //     MayumiData mayumiData = MayumiData.fromJson(dataMayumi.snapshot.value as Map);
+  //     Mayumi mayumi = Mayumi(key: dataMayumi.snapshot.key, mayumiData: mayumiData);
   //     mayumiList.add(mayumi);
   //     setState(() {});
   //   });
@@ -373,7 +434,7 @@ class _MayumiScreenState extends State<MayumiScreen> {
   //             Center(
   //               child: ElevatedButton(
   //                 onPressed: () {
-  //                   // Map<String, dynamic> mayumidata = {
+  //                   // Map<String, dynamic> mayumidataMayumi = {
   //                   //   'nama produk': namaController.text,
   //                   //   'berat produk': beratController.text,
   //                   //   'jumlah produk': jumlahController.text,
@@ -382,17 +443,17 @@ class _MayumiScreenState extends State<MayumiScreen> {
   //                   // };
 
   //                   // if(updateMayumiData) {
-  //                   //   dbRefMayumi.child('Mayumi').child(key!).update(mayumidata).then((value) {
+  //                   //   dbRefMayumi.child('Mayumi').child(key!).update(mayumidataMayumi).then((value) {
   //                   //     int index = mayumiList.indexWhere((element) => element.key == key);
   //                   //     mayumiList.removeAt(index);
-  //                   //     mayumiList.insert(index, Mayumi(key: key, mayumiData: MayumiData.fromJson(mayumidata)));
+  //                   //     mayumiList.insert(index, Mayumi(key: key, mayumiData: MayumiData.fromJson(mayumidataMayumi)));
   //                   //     setState(() {
                           
   //                   //     });
   //                   //     Navigator.of(context).pop();
   //                   //   });
   //                   // } else {
-  //                   //   dbRefMayumi.child('Mayumi').push().set(mayumidata).then((value) {
+  //                   //   dbRefMayumi.child('Mayumi').push().set(mayumidataMayumi).then((value) {
   //                   //   Navigator.of(context).pop();
   //                   // });
   //                   // }
@@ -443,7 +504,7 @@ class _MayumiScreenState extends State<MayumiScreen> {
 
   //                 ElevatedButton(
   //                   onPressed: () {
-  //                     // Map<String, dynamic> mayumidata = {
+  //                     // Map<String, dynamic> mayumidataMayumi = {
   //                     //   'nama produk': namaController.text,
   //                     //   'berat produk': beratController.text,
   //                     //   'jumlah produk': jumlahController.text,
@@ -459,7 +520,7 @@ class _MayumiScreenState extends State<MayumiScreen> {
   //                     //     Navigator.of(context).pop();
   //                     //   });
   //                     // } else {
-  //                     //   dbRefMayumi.child('Mayumi').push().set(mayumidata).then((value) {
+  //                     //   dbRefMayumi.child('Mayumi').push().set(mayumidataMayumi).then((value) {
   //                     //   Navigator.of(context).pop();
   //                     // });
   //                     // }
