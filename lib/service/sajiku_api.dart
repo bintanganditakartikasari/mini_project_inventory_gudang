@@ -9,13 +9,13 @@ class SajikuAPI {
   // final Dio _dio = Dio();
 
   Future<List<Sajiku>> getSajiku() async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Sajiku')){
-      return [];
-    }
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Sajiku')){
+    //   return [];
+    // }
 
     List<Sajiku> data = [];
-    final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
+    // final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
     try {
       final response = await Dio().get(baseURL);
       if (response.data != null && response.data.isNotEmpty) {
@@ -42,13 +42,13 @@ class SajikuAPI {
     return data;
   }
 
-  static Future<Sajiku?> addSajiku(Sajiku sajiku) async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Sajiku')){
-      return null;
-    }
+  Future<Sajiku?> addSajiku(Sajiku sajiku) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Sajiku')){
+    //   return null;
+    // }
 
-    final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
+    // final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
     try {
       final response = await Dio().post(
         baseURL,
@@ -76,13 +76,13 @@ class SajikuAPI {
     }
   }
 
-  static Future<bool> updateSajiku(Sajiku newSajiku) async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Sajiku')){
-      return false;
-    }
+  Future<bool> updateSajiku(Sajiku newSajiku) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Sajiku')){
+    //   return false;
+    // }
 
-    final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
+    // final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
     try{
       await Dio().patch(
         baseURL,
@@ -102,13 +102,13 @@ class SajikuAPI {
     }
   }
 
-  static Future<bool> deleteSajiku(String id) async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Sajiku')){
-      return false;
-    }
+  Future<bool> deleteSajiku(String id) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Sajiku')){
+    //   return false;
+    // }
 
-    final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
+    // final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
     try {
       await Dio().delete(baseURL);
       return true;

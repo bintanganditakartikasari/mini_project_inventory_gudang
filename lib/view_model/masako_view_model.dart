@@ -28,7 +28,7 @@ class MasakoViewModel with ChangeNotifier {
 
   Future<void> addMasako(Masako newMasako) async {
     try{
-      final result = await MasakoAPI.addMasako(newMasako);
+      final result = await MasakoAPI().addMasako(newMasako);
       if (result != null) {
         _masako.add(result);
         _masako.sort(
@@ -45,7 +45,7 @@ class MasakoViewModel with ChangeNotifier {
     final masakoIndex = _masako.indexWhere((masako) => masako.id == newMasako.id);
     if(masakoIndex >= 0) {
       try {
-        final result = await MasakoAPI.updateMasako(newMasako);
+        final result = await MasakoAPI().updateMasako(newMasako);
         if(result == true) {
           _masako[masakoIndex] = newMasako;
           _masako.sort(
@@ -63,7 +63,7 @@ class MasakoViewModel with ChangeNotifier {
     final masakoIndex = _masako.indexWhere((masako) => masako.id == id);
     if ( masakoIndex >= 0) {
       try {
-        final result = await MasakoAPI.deleteMasako(id);
+        final result = await MasakoAPI().deleteMasako(id);
         if (result == true) {
           _masako.removeAt(masakoIndex);
           notifyListeners();

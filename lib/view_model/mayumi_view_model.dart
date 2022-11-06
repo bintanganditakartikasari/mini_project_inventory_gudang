@@ -42,7 +42,7 @@ class MayumiViewModel with ChangeNotifier {
 
   Future<void> addMayumi(Mayumi newMayumi) async {
     try{
-      final result = await MayumiAPI.addMayumi(newMayumi);
+      final result = await MayumiAPI().addMayumi(newMayumi);
       if (result != null) {
         _mayumi.add(result);
         _mayumi.sort(
@@ -59,7 +59,7 @@ class MayumiViewModel with ChangeNotifier {
     final mayumiIndex = _mayumi.indexWhere((mayumi) => mayumi.id == newMayumi.id);
     if(mayumiIndex >= 0) {
       try {
-        final result = await MayumiAPI.updateMayumi(newMayumi);
+        final result = await MayumiAPI().updateMayumi(newMayumi);
         if(result == true) {
           _mayumi[mayumiIndex] = newMayumi;
           _mayumi.sort(
@@ -77,7 +77,7 @@ class MayumiViewModel with ChangeNotifier {
     final mayumiIndex = _mayumi.indexWhere((mayumi) => mayumi.id == id);
     if ( mayumiIndex >= 0) {
       try {
-        final result = await MayumiAPI.deleteMayumi(id);
+        final result = await MayumiAPI().deleteMayumi(id);
         if (result == true) {
           _mayumi.removeAt(mayumiIndex);
           notifyListeners();

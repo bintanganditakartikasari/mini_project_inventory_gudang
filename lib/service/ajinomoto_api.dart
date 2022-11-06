@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:mini_project_inventory_gudang/models/ajinomoto_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AjinomotoAPI {
   static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Ajinomoto.json';
@@ -13,10 +12,10 @@ class AjinomotoAPI {
   }
 
   Future<List<Ajinomoto>> getAjinomoto() async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Ajinomoto')){
-      return [];
-    }
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Ajinomoto')){
+    //   return [];
+    // }
 
     List<Ajinomoto> dataAjinomoto = [];
     
@@ -47,11 +46,11 @@ class AjinomotoAPI {
   }
   
 
-  static Future<Ajinomoto?> addAjinomoto(Ajinomoto ajinomoto) async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Ajinomoto')){
-      return null;
-    }
+  Future<Ajinomoto?> addAjinomoto(Ajinomoto ajinomoto) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Ajinomoto')){
+    //   return null;
+    // }
 
     // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
     try {
@@ -81,13 +80,13 @@ class AjinomotoAPI {
     }
   }
 
-  static Future<bool> updateAjinomoto(Ajinomoto newAjinomoto) async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Ajinomoto')){
-      return false;
-    }
+  Future<bool> updateAjinomoto(Ajinomoto newAjinomoto) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Ajinomoto')){
+    //   return false;
+    // }
 
-    final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
     try{
       await Dio().patch(
         baseURL,
@@ -107,13 +106,13 @@ class AjinomotoAPI {
     }
   }
 
-  static Future<bool> deleteAjinomoto(String id) async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Ajinomoto')){
-      return false;
-    }
+  Future<bool> deleteAjinomoto(String id) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Ajinomoto')){
+    //   return false;
+    // }
 
-    final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
     try {
       await Dio().delete(baseURL);
       return true;

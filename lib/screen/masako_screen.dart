@@ -79,7 +79,7 @@ class _MasakoScreenState extends State<MasakoScreen> {
               itemCount: dataMasako.masako.length,
               itemBuilder: (context, index) {
                 return Container(
-                  height: 120,
+                  height: 170,
                   padding: const EdgeInsets.all(10),
                   margin:  const EdgeInsets.only(top: 20, left: 20, right: 20),
                   decoration: BoxDecoration(
@@ -87,25 +87,30 @@ class _MasakoScreenState extends State<MasakoScreen> {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: const Color.fromARGB(255, 48, 160, 143), width: 2),
                   ),
-                  child: Row(
+                  child: Column(
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text('Nama Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataMasako.masako[index].nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                          Text('Berat Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataMasako.masako[index].berat} gr', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                          Text('Jumlah Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataMasako.masako[index].jumlah} pcs', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                          Text('Tanggal Produksi Produk  : ${dataMasako.masako[index].tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                          Text('Tanggal Expired Produk \t\t\t: ${dataMasako.masako[index].tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Nama Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataMasako.masako[index].nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                              Text('Berat Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataMasako.masako[index].berat} gr', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                              Text('Jumlah Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataMasako.masako[index].jumlah} pcs', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                              Text('Tanggal Produksi Produk  : ${dataMasako.masako[index].tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                              Text('Tanggal Expired Produk \t\t\t: ${dataMasako.masako[index].tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                            ],
+                          ),
                         ],
                       ),
-                      const Spacer(),
-                      Column(
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            alignment: Alignment.centerRight,
                             padding: const EdgeInsets.all(5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -138,7 +143,7 @@ class _MasakoScreenState extends State<MasakoScreen> {
                               children: [
                                 InkWell(
                                   onTap: (){},
-                                  child: Container(
+                                    child: Container(
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
                                       color: const Color.fromARGB(255, 48, 160, 143),

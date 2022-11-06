@@ -174,6 +174,7 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: namaController,
+                      keyboardType: TextInputType.name,
                       onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(
@@ -199,6 +200,7 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: beratController,
+                      keyboardType: TextInputType.number,
                       onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(
@@ -224,6 +226,7 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: jumlahController,
+                      keyboardType: TextInputType.number,
                       onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(
@@ -249,6 +252,7 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: produksiController,
+                      keyboardType: TextInputType.datetime,
                       onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(
@@ -274,6 +278,7 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: expiredController,
+                      keyboardType: TextInputType.datetime,
                       onFieldSubmitted: (value) => _submitDataAjinomoto(),
                     ),
                     const SizedBox(

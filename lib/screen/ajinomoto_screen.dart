@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_ajinomoto.dart';
+import 'package:mini_project_inventory_gudang/service/ajinomoto_api.dart';
 import 'package:mini_project_inventory_gudang/view_model/ajinomoto_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
   final jumlahController = TextEditingController();
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
               itemCount: dataAjinomoto.ajinomoto.length,
               itemBuilder: (context, index) {
                 return Container(
-                  height: 120,
+                  height: 170,
                   padding: const EdgeInsets.all(10),
                   margin:  const EdgeInsets.only(top: 20, left: 20, right: 20),
                   decoration: BoxDecoration(
@@ -87,32 +87,85 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: const Color.fromARGB(255, 48, 160, 143), width: 2),
                   ),
-                  child: Row(
+                  child: Column(
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text('Nama Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                          Text('Berat Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].berat} gr', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                          Text('Jumlah Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].jumlah} pcs', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                          Text('Tanggal Produksi Produk  : ${dataAjinomoto.ajinomoto[index].tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                          Text('Tanggal Expired Produk \t\t\t: ${dataAjinomoto.ajinomoto[index].tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Nama Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                              Text('Berat Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].berat} gr', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                              Text('Jumlah Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].jumlah} pcs', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                              Text('Tanggal Produksi Produk  : ${dataAjinomoto.ajinomoto[index].tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                              Text('Tanggal Expired Produk \t\t\t: ${dataAjinomoto.ajinomoto[index].tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                            ],
+                          ),
                         ],
                       ),
-                      const Spacer(),
-                      Column(
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                            alignment: Alignment.centerRight,
                             padding: const EdgeInsets.all(5),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 InkWell(
-                                  onTap: (){},
+                                  onTap: (){
+                                    showDialog(
+                                      context: context, 
+                                      builder: (context) {
+                                        return Dialog(
+                                          child: Container(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Center(
+                                                  widthFactor: double.infinity,
+                                                  child: Text('Apakah anda yakin akan menghapus ${dataAjinomoto.ajinomoto[index].nama}?', style: GoogleFonts.poppins(fontSize: 15, color: Colors.black)),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  children: [
+                                                    ElevatedButton(
+                                                      onPressed: (){
+                                                        //masih hapus semua data. Nanti coba lagi
+                                                        Provider.of<AjinomotoViewModel>(context, listen: false).deleteAjinomoto(dataAjinomoto.ajinomoto[index].id!.toString());
+                                                        Navigator.of(context).pop();
+                                                      }, 
+                                                      style: const ButtonStyle(
+                                                        backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
+                                                      ),
+                                                      child: const Text('Delete Produk', style: TextStyle(fontSize: 15))
+                                                    ),
+                                                    ElevatedButton(
+                                                      onPressed: (){
+                                                        Navigator.of(context).pop();
+                                                      }, 
+                                                      style: const ButtonStyle(
+                                                        backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
+                                                      ),
+                                                      child: const Text('Batal', style: TextStyle(fontSize: 15))
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    );
+                                  },
                                   child: Container(
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
@@ -138,7 +191,7 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                               children: [
                                 InkWell(
                                   onTap: (){},
-                                  child: Container(
+                                    child: Container(
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
                                       color: const Color.fromARGB(255, 48, 160, 143),
@@ -173,7 +226,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
           FloatingActionButton(
             backgroundColor: const Color.fromARGB(255, 48, 160, 143),
             onPressed: (){
-              // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const EntryScreen()));
               Navigator.of(context).push(PageRouteBuilder(
                 reverseTransitionDuration: const Duration(milliseconds: 300),
                 transitionDuration: const Duration(milliseconds: 300),

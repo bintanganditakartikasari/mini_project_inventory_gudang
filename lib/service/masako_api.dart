@@ -9,10 +9,10 @@ class MasakoAPI {
   final Dio _dio = Dio();
 
   Future<List<Masako>> getMasako() async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Masako')){
-      return [];
-    }
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Masako')){
+    //   return [];
+    // }
 
     List<Masako> data = [];
     
@@ -42,13 +42,13 @@ class MasakoAPI {
     return data;
   }
 
-  static Future<Masako?> addMasako(Masako masako) async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Masako')){
-      return null;
-    }
+  Future<Masako?> addMasako(Masako masako) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Masako')){
+    //   return null;
+    // }
 
-    final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
+    // final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
     try {
       final response = await Dio().post(
         baseURL,
@@ -76,13 +76,13 @@ class MasakoAPI {
     }
   }
 
-  static Future<bool> updateMasako(Masako newMasako) async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Masako')){
-      return false;
-    }
+  Future<bool> updateMasako(Masako newMasako) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Masako')){
+    //   return false;
+    // }
 
-    final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
+    // final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
     try{
       await Dio().patch(
         baseURL,
@@ -102,13 +102,13 @@ class MasakoAPI {
     }
   }
 
-  static Future<bool> deleteMasako(String id) async {
-    final prefs = await SharedPreferences.getInstance();
-    if(!prefs.containsKey('Masako')){
-      return false;
-    }
+  Future<bool> deleteMasako(String id) async {
+    // final prefs = await SharedPreferences.getInstance();
+    // if(!prefs.containsKey('Masako')){
+    //   return false;
+    // }
 
-    final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
+    // final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
     try {
       await Dio().delete(baseURL);
       return true;

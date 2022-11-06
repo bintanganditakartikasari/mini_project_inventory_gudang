@@ -28,7 +28,7 @@ class AjinomotoViewModel with ChangeNotifier {
 
   Future<void> addAjinomoto(Ajinomoto newAjinomoto) async {
     try{
-      final result = await AjinomotoAPI.addAjinomoto(newAjinomoto);
+      final result = await AjinomotoAPI().addAjinomoto(newAjinomoto);
       if (result != null) {
         _ajinomoto.add(result);
         _ajinomoto.sort(
@@ -45,7 +45,7 @@ class AjinomotoViewModel with ChangeNotifier {
     final ajinomotoIndex = _ajinomoto.indexWhere((ajinomoto) => ajinomoto.id == newAjinomoto.id);
     if(ajinomotoIndex >= 0) {
       try {
-        final result = await AjinomotoAPI.updateAjinomoto(newAjinomoto);
+        final result = await AjinomotoAPI().updateAjinomoto(newAjinomoto);
         if(result == true) {
           _ajinomoto[ajinomotoIndex] = newAjinomoto;
           _ajinomoto.sort(
@@ -63,7 +63,7 @@ class AjinomotoViewModel with ChangeNotifier {
     final ajinomotoIndex = _ajinomoto.indexWhere((ajinomoto) => ajinomoto.id == id);
     if ( ajinomotoIndex >= 0) {
       try {
-        final result = await AjinomotoAPI.deleteAjinomoto(id);
+        final result = await AjinomotoAPI().deleteAjinomoto(id);
         if (result == true) {
           _ajinomoto.removeAt(ajinomotoIndex);
           notifyListeners();
