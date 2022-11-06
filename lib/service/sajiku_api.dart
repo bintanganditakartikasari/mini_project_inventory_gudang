@@ -5,7 +5,7 @@ import 'package:mini_project_inventory_gudang/models/Sajiku_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SajikuAPI {
-  static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Sajiku';
+  static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Sajiku.json';
   // final Dio _dio = Dio();
 
   Future<List<Sajiku>> getSajiku() async {

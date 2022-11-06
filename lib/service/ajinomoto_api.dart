@@ -5,7 +5,7 @@ import 'package:mini_project_inventory_gudang/models/ajinomoto_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AjinomotoAPI {
-  static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Ajinomoto';
+  static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Ajinomoto.json';
   final Dio _dio = Dio();
 
   Future<List<Ajinomoto>> getAjinomoto() async {

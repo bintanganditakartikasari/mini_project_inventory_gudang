@@ -8,7 +8,6 @@ import 'package:mini_project_inventory_gudang/screen/home_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/masako_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/mayumi_screen.dart';
 import 'package:mini_project_inventory_gudang/screen/sajiku_screen.dart';
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project_inventory_gudang/view_model/ajinomoto_view_model.dart';
 import 'package:mini_project_inventory_gudang/view_model/masako_view_model.dart';
@@ -58,6 +57,129 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         initialRoute: HomeScreen.routeName,
+        // onGenerateRoute: (settings) {
+        //   if (settings.name == AjinomotoScreen.routeName) {
+        //     return PageRouteBuilder(
+        //       settings: settings,
+        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        //         final tween = Tween(
+        //         begin: const Offset(-1, 0),
+        //         end: Offset.zero,
+        //         );
+        //         return SlideTransition(
+        //         position: animation.drive(tween),
+        //         child: child,
+        //         );
+        //       },
+        //     );
+        //   } else if (settings.name == MasakoScreen.routeName) {
+        //     return PageRouteBuilder(
+        //       settings: settings,
+        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        //         final tween = Tween(
+        //         begin: const Offset(-1, 0),
+        //         end: Offset.zero,
+        //         );
+        //         return SlideTransition(
+        //         position: animation.drive(tween),
+        //         child: child,
+        //         );
+        //       },
+        //     );
+        //   } else if (settings.name == SajikuScreen.routeName) {
+        //     return PageRouteBuilder(
+        //       settings: settings,
+        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        //         final tween = Tween(
+        //         begin: const Offset(-1, 0),
+        //         end: Offset.zero,
+        //         );
+        //         return SlideTransition(
+        //         position: animation.drive(tween),
+        //         child: child,
+        //         );
+        //       },
+        //     );
+        //   } else if (settings.name == MayumiScreen.routeName) {
+        //     return PageRouteBuilder(
+        //       settings: settings,
+        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        //         final tween = Tween(
+        //         begin: const Offset(-1, 0),
+        //         end: Offset.zero,
+        //         );
+        //         return SlideTransition(
+        //         position: animation.drive(tween),
+        //         child: child,
+        //         );
+        //       },
+        //     );
+        //   } else if (settings.name == AjinomotoEntryScreen.routeName) {
+        //     return PageRouteBuilder(
+        //       settings: settings,
+        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        //         final tween = Tween(
+        //         begin: const Offset(-1, 0),
+        //         end: Offset.zero,
+        //         );
+        //         return SlideTransition(
+        //         position: animation.drive(tween),
+        //         child: child,
+        //         );
+        //       },
+        //     );
+        //   } else if (settings.name == MasakoEntryScreen.routeName) {
+        //     return PageRouteBuilder(
+        //       settings: settings,
+        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        //         final tween = Tween(
+        //         begin: const Offset(-1, 0),
+        //         end: Offset.zero,
+        //         );
+        //         return SlideTransition(
+        //         position: animation.drive(tween),
+        //         child: child,
+        //         );
+        //       },
+        //     );
+        //   } else if (settings.name == SajikuEntryScreen.routeName) {
+        //     return PageRouteBuilder(
+        //       settings: settings,
+        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        //         final tween = Tween(
+        //         begin: const Offset(-1, 0),
+        //         end: Offset.zero,
+        //         );
+        //         return SlideTransition(
+        //         position: animation.drive(tween),
+        //         child: child,
+        //         );
+        //       },
+        //     );
+        //   } else if (settings.name == MayumiEntryScreen.routeName) {
+        //     return PageRouteBuilder(
+        //       settings: settings,
+        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
+        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        //         final tween = Tween(
+        //         begin: const Offset(-1, 0),
+        //         end: Offset.zero,
+        //         );
+        //         return SlideTransition(
+        //         position: animation.drive(tween),
+        //         child: child,
+        //         );
+        //       },
+        //     );
+        //   }
+        // } 
         routes: {
           HomeScreen.routeName:(context) => const HomeScreen(),
           AjinomotoScreen.routeName:(context) => const AjinomotoScreen(),

@@ -5,7 +5,7 @@ import 'package:mini_project_inventory_gudang/models/Mayumi_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MayumiAPI {
-  static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Mayumi';
+  static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Mayumi.json';
   // final Dio _dio = Dio();
 
   Future<List<Mayumi>> getMayumi() async {

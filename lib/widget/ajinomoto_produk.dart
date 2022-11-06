@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mini_project_inventory_gudang/models/ajinomoto_model.dart';
 
 class AjinomotoProduk extends StatelessWidget {
-  final Ajinomoto data;
-   const AjinomotoProduk(this.data, {Key? key}) : super(key: key);
+  final Ajinomoto dataAjinomoto;
+   const AjinomotoProduk(this.dataAjinomoto, {Key? key}) : super(key: key);
    
     @override
     Widget build(Object context) {
@@ -25,11 +25,11 @@ class AjinomotoProduk extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nama Produk: ${data.nama.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Berat Produk: ${data.berat.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Jumlah Produk: ${data.jumlah.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Produksi Produk: ${data.tanggalProduksi.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
-                  Text('Tanggal Expired Produk: ${data.tanggalExpired.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Nama Produk: ${dataAjinomoto.nama.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Berat Produk: $dataAjinomoto.berat.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Jumlah Produk: ${dataAjinomoto.jumlah.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Tanggal Produksi Produk: ${dataAjinomoto.tanggalProduksi.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
+                  Text('Tanggal Expired Produk: ${dataAjinomoto.tanggalExpired.toString()}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black),),
                 ],
               ),
             ],

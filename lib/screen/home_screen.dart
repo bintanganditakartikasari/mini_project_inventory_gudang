@@ -113,22 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onTap: (){
                 Navigator.of(context).pushNamed(MasakoScreen.routeName);
-                // Navigator.of(context).push(PageRouteBuilder(
-                //   reverseTransitionDuration: const Duration(milliseconds: 500),
-                //   transitionDuration: const Duration(milliseconds: 500),
-                //   pageBuilder: (context, animation, secondaryAnimation) {
-                //   return const MasakoScreen();
-                // },
-                // transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                //   final tween = Tween(
-                //     begin: const Offset(-1, 0),
-                //     end: Offset.zero,
-                //   );
-                //   return SlideTransition(
-                //     position: animation.drive(tween),
-                //     child: child,
-                //   );
-                // }),);
               },
             ),
             const SizedBox(
