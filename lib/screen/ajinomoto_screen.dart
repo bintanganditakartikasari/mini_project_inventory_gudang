@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mini_project_inventory_gudang/models/ajinomoto_model.dart';
 import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_ajinomoto.dart';
 import 'package:mini_project_inventory_gudang/view_model/ajinomoto_view_model.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +20,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
 
-  List<Ajinomoto> ajinomotoList = [];
 
   @override
   Widget build(BuildContext context) {

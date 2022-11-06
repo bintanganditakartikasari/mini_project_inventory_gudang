@@ -6,7 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AjinomotoAPI {
   static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Ajinomoto.json';
-  final Dio _dio = Dio();
+  late Dio _dio;
+
+  AjinomotoAPI(){
+    _dio = Dio();
+  }
 
   Future<List<Ajinomoto>> getAjinomoto() async {
     final prefs = await SharedPreferences.getInstance();
@@ -14,7 +18,7 @@ class AjinomotoAPI {
       return [];
     }
 
-    List<Ajinomoto> data = [];
+    List<Ajinomoto> dataAjinomoto = [];
     
     try {
       final response = await _dio.get(baseURL);
@@ -24,7 +28,7 @@ class AjinomotoAPI {
         return [];
       }
       extractedData.forEach((key, value) {
-        data.add(
+        dataAjinomoto.add(
           Ajinomoto(
             id: key.toString(),
             nama: value['nama produk'].toString(),
@@ -39,7 +43,7 @@ class AjinomotoAPI {
     } catch (e) {
       rethrow;
     }
-    return data;
+    return dataAjinomoto;
   }
   
 
