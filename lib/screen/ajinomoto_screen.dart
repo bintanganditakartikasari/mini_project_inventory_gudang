@@ -25,13 +25,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
   @override
   Widget build(BuildContext context) {
 
-    // final Ajinomoto newAjinomoto = Ajinomoto(
-    //   berat: beratController.toString(), 
-    //   jumlah: jumlahController.toString(), 
-    //   nama: namaController.toString(), 
-    //   tanggalExpired: expiredController.toString(), 
-    //   tanggalProduksi: produksiController.toString());
-
     var dataAjinomoto = Provider.of<AjinomotoViewModel>(context);
 
     Size size = MediaQuery.of(context).size;
