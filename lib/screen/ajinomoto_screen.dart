@@ -25,12 +25,12 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final Ajinomoto newAjinomoto = Ajinomoto(
-      berat: beratController.toString(), 
-      jumlah: jumlahController.toString(), 
-      nama: namaController.toString(), 
-      tanggalExpired: expiredController.toString(), 
-      tanggalProduksi: produksiController.toString());
+    // final Ajinomoto newAjinomoto = Ajinomoto(
+    //   berat: beratController.toString(), 
+    //   jumlah: jumlahController.toString(), 
+    //   nama: namaController.toString(), 
+    //   tanggalExpired: expiredController.toString(), 
+    //   tanggalProduksi: produksiController.toString());
 
     var dataAjinomoto = Provider.of<AjinomotoViewModel>(context);
 
@@ -524,117 +524,154 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    enabledBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    focusedBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    prefixIcon: const Icon(
-                                                      Icons.inventory_2,
-                                                      color: Color.fromARGB(255, 48, 160, 143),
-                                                    ),
-                                                      hintText: 'Nama Produk',
-                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                Form(
+                                                  key: formKey,
+                                                  child: Column(
+                                                    children: [
+                                                      TextFormField(
+                                                        decoration: InputDecoration(
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          focusedBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          prefixIcon: const Icon(
+                                                            Icons.inventory_2,
+                                                            color: Color.fromARGB(255, 48, 160, 143),
+                                                          ),
+                                                            hintText: 'Nama Produk',
+                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                        ),
+                                                        controller: namaController,
+                                                        keyboardType: TextInputType.name,
+                                                        validator: (value) {
+                                                          if (value == null) {
+                                                            return 'Tidak boleh kosong';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      TextFormField(
+                                                        decoration: InputDecoration(
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          focusedBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          prefixIcon: const Icon(
+                                                            Icons.note_add_outlined,
+                                                            color: Color.fromARGB(255, 48, 160, 143),
+                                                          ),
+                                                            hintText: 'Berat Bersih Produk',
+                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                        ),
+                                                        controller: beratController,
+                                                        keyboardType: TextInputType.number,
+                                                        validator: (value) {
+                                                          if (value == null) {
+                                                            return 'Tidak boleh kosong';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      TextFormField(
+                                                        decoration: InputDecoration(
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          focusedBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          prefixIcon: const Icon(
+                                                            Icons.add_circle_outline_rounded,
+                                                            color: Color.fromARGB(255, 48, 160, 143),
+                                                          ),
+                                                            hintText: 'Jumlah Produk',
+                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                        ),
+                                                        controller: jumlahController,
+                                                        keyboardType: TextInputType.number,
+                                                        validator: (value) {
+                                                          if (value == null) {
+                                                            return 'Tidak boleh kosong';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      TextFormField(
+                                                        decoration: InputDecoration(
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          focusedBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          prefixIcon: const Icon(
+                                                            Icons.date_range,
+                                                            color: Color.fromARGB(255, 48, 160, 143),
+                                                          ),
+                                                            hintText: 'Tanggal Produksi Produk',
+                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                        ),
+                                                        controller: produksiController,
+                                                        keyboardType: TextInputType.datetime,
+                                                        validator: (value) {
+                                                          if (value == null) {
+                                                            return 'Tidak boleh kosong';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
+                                                      ),
+                                                      TextFormField(
+                                                        decoration: InputDecoration(
+                                                          enabledBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          focusedBorder: OutlineInputBorder(
+                                                            borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                            borderRadius: BorderRadius.circular(6),
+                                                          ),
+                                                          prefixIcon: const Icon(
+                                                            Icons.date_range,
+                                                            color: Color.fromARGB(255, 48, 160, 143),
+                                                          ),
+                                                            hintText: 'Tanggal Expired Produk',
+                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                        ),
+                                                        controller: expiredController,
+                                                        keyboardType: TextInputType.datetime,
+                                                        validator: (value) {
+                                                          if (value == null) {
+                                                            return 'Tidak boleh kosong';
+                                                          }
+                                                          return null;
+                                                        },
+                                                      ),
+                                                    ],
                                                   ),
-                                                  controller: namaController,
-                                                  keyboardType: TextInputType.name,
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    enabledBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    focusedBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    prefixIcon: const Icon(
-                                                      Icons.note_add_outlined,
-                                                      color: Color.fromARGB(255, 48, 160, 143),
-                                                    ),
-                                                      hintText: 'Berat Bersih Produk',
-                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-                                                  ),
-                                                  controller: beratController,
-                                                  keyboardType: TextInputType.number,
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    enabledBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    focusedBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    prefixIcon: const Icon(
-                                                      Icons.add_circle_outline_rounded,
-                                                      color: Color.fromARGB(255, 48, 160, 143),
-                                                    ),
-                                                      hintText: 'Jumlah Produk',
-                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-                                                  ),
-                                                  controller: jumlahController,
-                                                  keyboardType: TextInputType.number,
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    enabledBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    focusedBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    prefixIcon: const Icon(
-                                                      Icons.date_range,
-                                                      color: Color.fromARGB(255, 48, 160, 143),
-                                                    ),
-                                                      hintText: 'Tanggal Produksi Produk',
-                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-                                                  ),
-                                                  controller: produksiController,
-                                                  keyboardType: TextInputType.datetime,
-                                                ),
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                TextFormField(
-                                                  decoration: InputDecoration(
-                                                    enabledBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    focusedBorder: OutlineInputBorder(
-                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
-                                                      borderRadius: BorderRadius.circular(6),
-                                                    ),
-                                                    prefixIcon: const Icon(
-                                                      Icons.date_range,
-                                                      color: Color.fromARGB(255, 48, 160, 143),
-                                                    ),
-                                                      hintText: 'Tanggal Expired Produk',
-                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-                                                  ),
-                                                  controller: expiredController,
-                                                  keyboardType: TextInputType.datetime,
                                                 ),
                                                 const SizedBox(
                                                   height: 10,
@@ -645,15 +682,17 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                                       if (formKey.currentState!.validate()) {
                                                         final ajinomoto = Provider.of<AjinomotoViewModel>(context, listen: false);
                                                         Ajinomoto ajinomotoData = Ajinomoto(
-                                                          id: newAjinomoto.id,
-                                                          nama: newAjinomoto.nama, 
-                                                          berat: newAjinomoto.berat, 
-                                                          jumlah: newAjinomoto.jumlah, 
-                                                          tanggalProduksi: newAjinomoto.tanggalProduksi, 
-                                                          tanggalExpired: newAjinomoto.tanggalExpired,
+                                                          id: dataAjinomoto.ajinomoto[index].id,
+                                                          nama: namaController.text, 
+                                                          berat: beratController.text, 
+                                                          jumlah: jumlahController.text, 
+                                                          tanggalProduksi: produksiController.text, 
+                                                          tanggalExpired: expiredController.text,
                                                         );
+                                                        await ajinomoto.updateAjinomoto(ajinomotoData);
+                                                        // ignore: use_build_context_synchronously
+                                                        Navigator.of(context).pop();
                                                       }
-                                                      await ajinomotoData.updateAjinomoto(ajinomoto.ajinomotoData);
                                                     },
                                                     style: const ButtonStyle(
                                                       backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143))
