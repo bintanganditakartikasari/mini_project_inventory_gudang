@@ -42,7 +42,7 @@ class SajikuViewModel with ChangeNotifier {
 
   Future<void> addSajiku(Sajiku newSajiku) async {
     try{
-      final result = await SajikuAPI.addSajiku(newSajiku);
+      final result = await SajikuAPI().addSajiku(newSajiku);
       if (result != null) {
         _sajiku.add(result);
         _sajiku.sort(
@@ -59,7 +59,7 @@ class SajikuViewModel with ChangeNotifier {
     final sajikuIndex = _sajiku.indexWhere((sajiku) => sajiku.id == newSajiku.id);
     if(sajikuIndex >= 0) {
       try {
-        final result = await SajikuAPI.updateSajiku(newSajiku);
+        final result = await SajikuAPI().updateSajiku(newSajiku);
         if(result == true) {
           _sajiku[sajikuIndex] = newSajiku;
           _sajiku.sort(
@@ -77,7 +77,7 @@ class SajikuViewModel with ChangeNotifier {
     final sajikuIndex = _sajiku.indexWhere((sajiku) => sajiku.id == id);
     if ( sajikuIndex >= 0) {
       try {
-        final result = await SajikuAPI.deleteSajiku(id);
+        final result = await SajikuAPI().deleteSajiku(id);
         if (result == true) {
           _sajiku.removeAt(sajikuIndex);
           notifyListeners();

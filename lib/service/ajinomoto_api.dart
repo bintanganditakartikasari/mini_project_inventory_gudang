@@ -12,10 +12,6 @@ class AjinomotoAPI {
   }
 
   Future<List<Ajinomoto>> getAjinomoto() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Ajinomoto')){
-    //   return [];
-    // }
 
     List<Ajinomoto> dataAjinomoto = [];
     
@@ -47,12 +43,7 @@ class AjinomotoAPI {
   
 
   Future<Ajinomoto?> addAjinomoto(Ajinomoto ajinomoto) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Ajinomoto')){
-    //   return null;
-    // }
-
-    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    
     try {
       final response = await Dio().post(
         baseURL,
@@ -81,15 +72,10 @@ class AjinomotoAPI {
   }
 
   Future<bool> updateAjinomoto(Ajinomoto newAjinomoto) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Ajinomoto')){
-    //   return false;
-    // }
-
-    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    
     try{
       await Dio().patch(
-        baseURL,
+        'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Ajinomoto/${newAjinomoto.id}.json',
         data: jsonEncode(
           {
             'nama produk': newAjinomoto.nama,
@@ -107,27 +93,12 @@ class AjinomotoAPI {
   }
 
   Future<bool> deleteAjinomoto(String id) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Ajinomoto')){
-    //   return false;
-    // }
-
-    // final extractedAjinomotoData = jsonDecode(prefs.getString('Ajinomoto').toString());
+    
     try {
-      await Dio().delete(baseURL);
+      await Dio().delete('https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Ajinomoto/$id.json');
       return true;
     } catch (error) {
       rethrow;
     }
   }
-
-  // Future<bool> editAjinomoto(Ajinomoto ajinomoto) async {
-  //   final response = await _dio.put('$baseURL/${ajinomoto.id}',
-  //   data: ajinomoto.toJson(),
-  //   );
-  //   if (response.data['id'] > 0) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 }

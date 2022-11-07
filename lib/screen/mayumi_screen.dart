@@ -116,7 +116,55 @@ class _MayumiScreenState extends State<MayumiScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 InkWell(
-                                  onTap: (){},
+                                  onTap: (){
+                                    showDialog(
+                                      context: context, 
+                                      builder: (context) {
+                                        return Dialog(
+                                          child: Container(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Center(
+                                                  widthFactor: double.infinity,
+                                                  child: Text('Apakah anda yakin akan menghapus ${dataMayumi.mayumi[index].nama}?', style: GoogleFonts.poppins(fontSize: 15, color: Colors.black)),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  children: [
+                                                    ElevatedButton(
+                                                      onPressed: (){
+                                                        //masih hapus semua data. Nanti coba lagi
+                                                        Provider.of<MayumiViewModel>(context, listen: false).deleteMayumi(dataMayumi.mayumi[index].id!.toString());
+                                                        Navigator.of(context).pop();
+                                                      }, 
+                                                      style: const ButtonStyle(
+                                                        backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
+                                                      ),
+                                                      child: const Text('Delete Produk', style: TextStyle(fontSize: 15))
+                                                    ),
+                                                    ElevatedButton(
+                                                      onPressed: (){
+                                                        Navigator.of(context).pop();
+                                                      }, 
+                                                      style: const ButtonStyle(
+                                                        backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
+                                                      ),
+                                                      child: const Text('Batal', style: TextStyle(fontSize: 15))
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    );
+                                  },
                                   child: Container(
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
@@ -141,7 +189,157 @@ class _MayumiScreenState extends State<MayumiScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 InkWell(
-                                  onTap: (){},
+                                  onTap: (){
+                                    showDialog(
+                                      context: context, 
+                                      builder: (context) {
+                                        return Dialog(
+                                          child: Container(
+                                            padding: const EdgeInsets.all(10),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    prefixIcon: const Icon(
+                                                      Icons.inventory_2,
+                                                      color: Color.fromARGB(255, 48, 160, 143),
+                                                    ),
+                                                      hintText: 'Nama Produk',
+                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                      filled: true,
+                                                      fillColor: Colors.white,
+                                                  ),
+                                                  controller: namaController,
+                                                  keyboardType: TextInputType.name,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    prefixIcon: const Icon(
+                                                      Icons.note_add_outlined,
+                                                      color: Color.fromARGB(255, 48, 160, 143),
+                                                    ),
+                                                      hintText: 'Berat Bersih Produk',
+                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                      filled: true,
+                                                      fillColor: Colors.white,
+                                                  ),
+                                                  controller: beratController,
+                                                  keyboardType: TextInputType.number,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    prefixIcon: const Icon(
+                                                      Icons.add_circle_outline_rounded,
+                                                      color: Color.fromARGB(255, 48, 160, 143),
+                                                    ),
+                                                      hintText: 'Jumlah Produk',
+                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                      filled: true,
+                                                      fillColor: Colors.white,
+                                                  ),
+                                                  controller: jumlahController,
+                                                  keyboardType: TextInputType.number,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    prefixIcon: const Icon(
+                                                      Icons.date_range,
+                                                      color: Color.fromARGB(255, 48, 160, 143),
+                                                    ),
+                                                      hintText: 'Tanggal Produksi Produk',
+                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                      filled: true,
+                                                      fillColor: Colors.white,
+                                                  ),
+                                                  controller: produksiController,
+                                                  keyboardType: TextInputType.datetime,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                TextFormField(
+                                                  decoration: InputDecoration(
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderSide: const BorderSide(color: Color.fromARGB(255, 48, 160, 143)),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    prefixIcon: const Icon(
+                                                      Icons.date_range,
+                                                      color: Color.fromARGB(255, 48, 160, 143),
+                                                    ),
+                                                      hintText: 'Tanggal Expired Produk',
+                                                      hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                      filled: true,
+                                                      fillColor: Colors.white,
+                                                  ),
+                                                  controller: expiredController,
+                                                  keyboardType: TextInputType.datetime,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Center(
+                                                  child: ElevatedButton(
+                                                    onPressed: (){},
+                                                    style: const ButtonStyle(
+                                                      backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143))
+                                                    ),
+                                                    child: const Text('Update Produk', style: TextStyle(fontSize: 15)),
+                                                  ), 
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    );
+                                  },
                                     child: Container(
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
