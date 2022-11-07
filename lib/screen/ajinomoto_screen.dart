@@ -698,15 +698,15 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                                       backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143))
                                                     ),
                                                     child: const Text('Update Produk', style: TextStyle(fontSize: 15)),
-                                                  ), 
-                                                ),
-                                              ],
+                                                    ), 
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        );
-                                      }
-                                    );
-                                  },
+                                          );
+                                        }
+                                      );
+                                    },
                                     child: Container(
                                     padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
