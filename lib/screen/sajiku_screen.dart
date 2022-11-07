@@ -5,7 +5,6 @@ import 'package:mini_project_inventory_gudang/view_model/sajiku_view_model.dart'
 import 'package:provider/provider.dart';
 
 class SajikuScreen extends StatefulWidget {
-  static const routeName = '/home/sajiku';
   const SajikuScreen({super.key});
 
   @override
@@ -75,6 +74,7 @@ class _SajikuScreenState extends State<SajikuScreen> {
           ),
           Expanded(
             child: ListView.separated(
+              padding: const EdgeInsets.all(8),
               itemCount: dataSajiku.sajiku.length,
               itemBuilder: (context, index) {
                 return Container(
@@ -91,6 +91,7 @@ class _SajikuScreenState extends State<SajikuScreen> {
                       Row(
                         children: [
                           Column(
+                            mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -190,6 +191,11 @@ class _SajikuScreenState extends State<SajikuScreen> {
                               children: [
                                 InkWell(
                                   onTap: (){
+                                    namaController.text = dataSajiku.sajiku[index].nama.toString();
+                                    beratController.text = dataSajiku.sajiku[index].berat.toString();
+                                    jumlahController.text = dataSajiku.sajiku[index].jumlah.toString();
+                                    produksiController.text = dataSajiku.sajiku[index].tanggalProduksi.toString();
+                                    expiredController.text = dataSajiku.sajiku[index].tanggalExpired.toString();
                                     showDialog(
                                       context: context, 
                                       builder: (context) {
@@ -375,7 +381,6 @@ class _SajikuScreenState extends State<SajikuScreen> {
           FloatingActionButton(
             backgroundColor: const Color.fromARGB(255, 48, 160, 143),
             onPressed: (){
-              // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const EntryScreen()));
               Navigator.of(context).push(PageRouteBuilder(
                 reverseTransitionDuration: const Duration(milliseconds: 300),
                 transitionDuration: const Duration(milliseconds: 300),

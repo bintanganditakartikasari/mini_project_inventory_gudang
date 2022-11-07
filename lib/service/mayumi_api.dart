@@ -6,16 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MayumiAPI {
   static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Mayumi.json';
-  // final Dio _dio = Dio();
 
   Future<List<Mayumi>> getMayumi() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Mayumi')){
-    //   return [];
-    // }
 
     List<Mayumi> data = [];
-    // final extractedMayumiData = jsonDecode(prefs.getString('Mayumi').toString());
+   
     try {
       final response = await Dio().get(baseURL);
       if (response.data != null && response.data.isNotEmpty) {
@@ -43,12 +38,7 @@ class MayumiAPI {
   }
 
   Future<Mayumi?> addMayumi(Mayumi mayumi) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Mayumi')){
-    //   return null;
-    // }
-
-    // final extractedMayumiData = jsonDecode(prefs.getString('Mayumi').toString());
+    
     try {
       final response = await Dio().post(
         baseURL,
@@ -77,15 +67,10 @@ class MayumiAPI {
   }
 
   Future<bool> updateMayumi(Mayumi newMayumi) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Mayumi')){
-    //   return false;
-    // }
-
-    // final extractedMayumiData = jsonDecode(prefs.getString('Mayumi').toString());
+    
     try{
       await Dio().patch(
-        baseURL,
+        'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Mayumi/${newMayumi.id}.json',
         data: jsonEncode(
           {
             'nama produk': newMayumi.nama,
@@ -103,14 +88,9 @@ class MayumiAPI {
   }
 
   Future<bool> deleteMayumi(String id) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Mayumi')){
-    //   return false;
-    // }
-
-    // final extractedMayumiData = jsonDecode(prefs.getString('Mayumi').toString());
+  
     try {
-      await Dio().delete(baseURL);
+      await Dio().delete('https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Mayumi/$id.json');
       return true;
     } catch (error) {
       rethrow;

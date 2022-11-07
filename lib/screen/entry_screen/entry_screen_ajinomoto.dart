@@ -22,13 +22,6 @@ class _AjinomotoEntryScreen extends State<AjinomotoEntryScreen> {
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
 
-  // late DatabaseReference dbRefAjinomoto;
-
-  // @override
-  // void initState(){
-  //   super.initState();
-  //   dbRefAjinomoto = FirebaseDatabase.instance.ref().child('Ajinomoto');
-  // }
 
   @override
   void initState(){

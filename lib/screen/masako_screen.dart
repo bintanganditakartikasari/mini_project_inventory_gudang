@@ -5,7 +5,6 @@ import 'package:mini_project_inventory_gudang/view_model/masako_view_model.dart'
 import 'package:provider/provider.dart';
 
 class MasakoScreen extends StatefulWidget {
-  static const routeName = '/home/masako';
   const MasakoScreen({super.key});
 
   @override
@@ -76,6 +75,7 @@ class _MasakoScreenState extends State<MasakoScreen> {
           ),
           Expanded(
             child: ListView.separated(
+              padding: const EdgeInsets.all(8),
               itemCount: dataMasako.masako.length,
               itemBuilder: (context, index) {
                 return Container(
@@ -191,6 +191,11 @@ class _MasakoScreenState extends State<MasakoScreen> {
                               children: [
                                 InkWell(
                                   onTap: (){
+                                    namaController.text = dataMasako.masako[index].nama.toString();
+                                    beratController.text = dataMasako.masako[index].berat.toString();
+                                    jumlahController.text = dataMasako.masako[index].jumlah.toString();
+                                    produksiController.text = dataMasako.masako[index].tanggalProduksi.toString();
+                                    expiredController.text = dataMasako.masako[index].tanggalExpired.toString();
                                     showDialog(
                                       context: context, 
                                       builder: (context) {
@@ -376,7 +381,6 @@ class _MasakoScreenState extends State<MasakoScreen> {
           FloatingActionButton(
             backgroundColor: const Color.fromARGB(255, 48, 160, 143),
             onPressed: (){
-              // Navigator.of(context).push(MaterialPageRoute(builder: (_) => const EntryScreen()));
               Navigator.of(context).push(PageRouteBuilder(
                 reverseTransitionDuration: const Duration(milliseconds: 300),
                 transitionDuration: const Duration(milliseconds: 300),

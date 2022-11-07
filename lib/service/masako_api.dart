@@ -2,17 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:mini_project_inventory_gudang/models/Masako_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MasakoAPI {
   static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Masako.json';
   final Dio _dio = Dio();
 
   Future<List<Masako>> getMasako() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Masako')){
-    //   return [];
-    // }
 
     List<Masako> data = [];
     
@@ -43,12 +38,7 @@ class MasakoAPI {
   }
 
   Future<Masako?> addMasako(Masako masako) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Masako')){
-    //   return null;
-    // }
 
-    // final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
     try {
       final response = await Dio().post(
         baseURL,
@@ -77,15 +67,10 @@ class MasakoAPI {
   }
 
   Future<bool> updateMasako(Masako newMasako) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Masako')){
-    //   return false;
-    // }
-
-    // final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
+    
     try{
       await Dio().patch(
-        baseURL,
+        'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Masako/${newMasako.id}.json',
         data: jsonEncode(
           {
             'nama produk': newMasako.nama,
@@ -103,27 +88,12 @@ class MasakoAPI {
   }
 
   Future<bool> deleteMasako(String id) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Masako')){
-    //   return false;
-    // }
-
-    // final extractedMasakoData = jsonDecode(prefs.getString('Masako').toString());
+    
     try {
-      await Dio().delete(baseURL);
+      await Dio().delete('https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Masako/$id.json');
       return true;
     } catch (error) {
       rethrow;
     }
   }
-
-  // Future<bool> editMasako(Masako Masako) async {
-  //   final response = await _dio.put('$baseURL/${Masako.id}',
-  //   data: Masako.toJson(),
-  //   );
-  //   if (response.data['id'] > 0) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 }

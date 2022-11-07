@@ -1,10 +1,13 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_project_inventory_gudang/models/Mayumi_model.dart';
+import 'package:mini_project_inventory_gudang/view_model/mayumi_view_model.dart';
+import 'package:provider/provider.dart';
 
 class MayumiEntryScreen extends StatefulWidget {
   static const routeName = '/mayumi/new';
-  const MayumiEntryScreen({super.key});
+  final Mayumi? mayumi;
+  const MayumiEntryScreen({super.key, this.mayumi});
 
   @override
   State<MayumiEntryScreen> createState() => _MayumiEntryScreen();
@@ -18,13 +21,65 @@ class _MayumiEntryScreen extends State<MayumiEntryScreen> {
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
 
-  late DatabaseReference dbRefMayumi;
-
   @override
   void initState(){
     super.initState();
-    dbRefMayumi = FirebaseDatabase.instance.ref().child('Mayumi');
+    if(widget.mayumi != null) {
+      final data = widget.mayumi!;
+      namaController.text = data.nama ?? '';
+      beratController.text = data.berat ?? '';
+      jumlahController.text = data.jumlah ?? '';
+      produksiController.text = data.tanggalProduksi ?? '';
+      expiredController.text = data.tanggalExpired ?? '';
+    }
   }
+
+  Future<void> _submitDataMayumi() async {
+    if (namaController.text.isEmpty || 
+        beratController.text.isEmpty ||
+        jumlahController.text.isEmpty ||
+        produksiController.text.isEmpty ||
+        expiredController.text.isEmpty) {
+      return;    
+    }
+
+    final nama = namaController.text;
+    final berat = beratController.text;
+    final jumlah = jumlahController.text;
+    final tanggalProduksi = produksiController.text;
+    final tanggalExpired = expiredController.text;
+
+    try {
+      if (widget.mayumi != null) {
+        final data = widget.mayumi!;
+        final updateMayumi = Mayumi(
+          id: data.id, 
+          nama: nama, 
+          berat: berat, 
+          jumlah: jumlah, 
+          tanggalProduksi: tanggalProduksi, 
+          tanggalExpired: tanggalExpired
+        );
+
+        await Provider.of<MayumiViewModel>(context, listen: false).updateMayumi(updateMayumi);
+      } else {
+        final newMayumi = Mayumi(
+          id: '',
+          nama: nama, 
+          berat: berat, 
+          jumlah: jumlah, 
+          tanggalProduksi: tanggalProduksi, 
+          tanggalExpired: tanggalExpired);
+
+          await Provider.of<MayumiViewModel>(context, listen: false).addMayumi(newMayumi);
+      }
+    } catch (error) {
+      return;
+    }
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +167,8 @@ class _MayumiEntryScreen extends State<MayumiEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: namaController,
+                      keyboardType: TextInputType.name,
+                      onFieldSubmitted: (value) => _submitDataMayumi(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -136,6 +193,8 @@ class _MayumiEntryScreen extends State<MayumiEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: beratController,
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (value) => _submitDataMayumi(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -160,6 +219,8 @@ class _MayumiEntryScreen extends State<MayumiEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: jumlahController,
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (value) => _submitDataMayumi(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -184,6 +245,8 @@ class _MayumiEntryScreen extends State<MayumiEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: produksiController,
+                      keyboardType: TextInputType.datetime,
+                      onFieldSubmitted: (value) => _submitDataMayumi(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -208,23 +271,15 @@ class _MayumiEntryScreen extends State<MayumiEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: expiredController,
+                      keyboardType: TextInputType.datetime,
+                      onFieldSubmitted: (value) => _submitDataMayumi(),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Center(
                       child: ElevatedButton(
-                        onPressed: (){
-                          Map<String, String> mayumi = {
-                            'nama produk': namaController.text,
-                            'jumlah produk': jumlahController.text,
-                            'berat produk': beratController.text,
-                            'tanggal produksi': produksiController.text,
-                            'tanggal expired': expiredController.text,
-                          };
-                          dbRefMayumi.push().set(mayumi);
-                          Navigator.of(context).pop();
-                        }, 
+                        onPressed: _submitDataMayumi, 
                         style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
                         ),

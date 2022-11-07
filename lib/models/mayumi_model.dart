@@ -1,59 +1,3 @@
-// class Mayumi{
-//   String? key;
-//   MayumiData mayumiData;
-
-//   Mayumi({this.key, required this.mayumiData});
-// }
-
-// class MayumiData{
-//   late String id;
-//   String? nama;
-//   String? berat;
-//   String? jumlah;
-//   String? tanggalProduksi;
-//   String? tanggalExpired;
-
-//   MayumiData({required this.id, this.nama, this.berat, this.jumlah, this.tanggalProduksi, this.tanggalExpired});
-
-//   MayumiData.fromJson(Map<dynamic, dynamic> json){
-//     nama = json['nama produk'];
-//     berat = json['berat produk'];
-//     jumlah = json['jumlah produk'];
-//     tanggalProduksi = json['tanggal produksi'];
-//     tanggalExpired = json['tanggal expired'];
-//   }
-// }
-
-// class Mayumi {
-//   String? key;
-//   String nama;
-//   String berat;
-//   String jumlah;
-//   String tanggalProduksi;
-//   String tanggalExpired;
-
-//   Mayumi({required this.key, required this.nama, required this.berat, required this.jumlah, required this.tanggalProduksi, required this.tanggalExpired});
-  
-//   factory Mayumi.fromJson(Map<String, dynamic> json) {
-//     return Mayumi(
-//       key: json['key'],
-//       nama: json['nama produk'], 
-//       berat: json['berat produk'], 
-//       jumlah: json['jumlah produk'], 
-//       tanggalProduksi: json['tanggal produksi'], 
-//       tanggalExpired: json['tanggal expired']);
-//   }
-
-//   Map<String, dynamic> toJson() => {
-//     'key': key,
-//     'nama produk': nama,
-//     'berat produk': berat,
-//     'jumlah produk': jumlah,
-//     'tanggal produksi': tanggalProduksi,
-//     'tanggal expired': tanggalExpired,
-//   };
-// }
-
 import 'dart:convert';
 
 class Mayumi {
@@ -64,7 +8,7 @@ class Mayumi {
   String tanggalProduksi;
   String tanggalExpired;
 
-  Mayumi({required this.id, required this.nama, required this.berat, required this.jumlah, required this.tanggalProduksi, required this.tanggalExpired});
+  Mayumi({this.id, required this.nama, required this.berat, required this.jumlah, required this.tanggalProduksi, required this.tanggalExpired});
 
   factory Mayumi.fromJson(Map<String, dynamic> map) {
     return Mayumi(

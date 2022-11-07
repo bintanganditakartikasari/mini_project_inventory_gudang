@@ -1,25 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:mini_project_inventory_gudang/screen/ajinomoto_screen.dart';
-import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_ajinomoto.dart';
-import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_masako.dart';
-import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_mayumi.dart';
-import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_sajiku.dart';
-import 'package:mini_project_inventory_gudang/screen/home_screen.dart';
-import 'package:mini_project_inventory_gudang/screen/masako_screen.dart';
-import 'package:mini_project_inventory_gudang/screen/mayumi_screen.dart';
-import 'package:mini_project_inventory_gudang/screen/sajiku_screen.dart';
+import 'package:mini_project_inventory_gudang/view_model/theme_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:mini_project_inventory_gudang/screen/home_screen.dart';
 import 'package:mini_project_inventory_gudang/view_model/ajinomoto_view_model.dart';
 import 'package:mini_project_inventory_gudang/view_model/masako_view_model.dart';
 import 'package:mini_project_inventory_gudang/view_model/mayumi_view_model.dart';
 import 'package:mini_project_inventory_gudang/view_model/sajiku_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
-  runApp(const MyApp());
-}
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   Firebase.initializeApp();
+//   runApp(const MyApp());
+// }
 
 // Future<void> main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -33,186 +27,47 @@ void main() async {
 //   );
 // }
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => ThemeChanger(isDarkTheme: prefs.getBool('isDarkTheme') ?? false),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => AjinomotoViewModel(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => MasakoViewModel(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => MayumiViewModel(),
+        ),
+      ChangeNotifierProvider(
+        create: (_) => SajikuViewModel(),
+      ),
+    ],
+    child: const MyApp(),
+    ),
+  );
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => AjinomotoViewModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => MasakoViewModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => MayumiViewModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => SajikuViewModel(),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        initialRoute: HomeScreen.routeName,
-        // onGenerateRoute: (settings) {
-        //   if (settings.name == AjinomotoScreen.routeName) {
-        //     return PageRouteBuilder(
-        //       settings: settings,
-        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        //         final tween = Tween(
-        //         begin: const Offset(-1, 0),
-        //         end: Offset.zero,
-        //         );
-        //         return SlideTransition(
-        //         position: animation.drive(tween),
-        //         child: child,
-        //         );
-        //       },
-        //     );
-        //   } else if (settings.name == MasakoScreen.routeName) {
-        //     return PageRouteBuilder(
-        //       settings: settings,
-        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        //         final tween = Tween(
-        //         begin: const Offset(-1, 0),
-        //         end: Offset.zero,
-        //         );
-        //         return SlideTransition(
-        //         position: animation.drive(tween),
-        //         child: child,
-        //         );
-        //       },
-        //     );
-        //   } else if (settings.name == SajikuScreen.routeName) {
-        //     return PageRouteBuilder(
-        //       settings: settings,
-        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        //         final tween = Tween(
-        //         begin: const Offset(-1, 0),
-        //         end: Offset.zero,
-        //         );
-        //         return SlideTransition(
-        //         position: animation.drive(tween),
-        //         child: child,
-        //         );
-        //       },
-        //     );
-        //   } else if (settings.name == MayumiScreen.routeName) {
-        //     return PageRouteBuilder(
-        //       settings: settings,
-        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        //         final tween = Tween(
-        //         begin: const Offset(-1, 0),
-        //         end: Offset.zero,
-        //         );
-        //         return SlideTransition(
-        //         position: animation.drive(tween),
-        //         child: child,
-        //         );
-        //       },
-        //     );
-        //   } else if (settings.name == AjinomotoEntryScreen.routeName) {
-        //     return PageRouteBuilder(
-        //       settings: settings,
-        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        //         final tween = Tween(
-        //         begin: const Offset(-1, 0),
-        //         end: Offset.zero,
-        //         );
-        //         return SlideTransition(
-        //         position: animation.drive(tween),
-        //         child: child,
-        //         );
-        //       },
-        //     );
-        //   } else if (settings.name == MasakoEntryScreen.routeName) {
-        //     return PageRouteBuilder(
-        //       settings: settings,
-        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        //         final tween = Tween(
-        //         begin: const Offset(-1, 0),
-        //         end: Offset.zero,
-        //         );
-        //         return SlideTransition(
-        //         position: animation.drive(tween),
-        //         child: child,
-        //         );
-        //       },
-        //     );
-        //   } else if (settings.name == SajikuEntryScreen.routeName) {
-        //     return PageRouteBuilder(
-        //       settings: settings,
-        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        //         final tween = Tween(
-        //         begin: const Offset(-1, 0),
-        //         end: Offset.zero,
-        //         );
-        //         return SlideTransition(
-        //         position: animation.drive(tween),
-        //         child: child,
-        //         );
-        //       },
-        //     );
-        //   } else if (settings.name == MayumiEntryScreen.routeName) {
-        //     return PageRouteBuilder(
-        //       settings: settings,
-        //       pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-        //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        //         final tween = Tween(
-        //         begin: const Offset(-1, 0),
-        //         end: Offset.zero,
-        //         );
-        //         return SlideTransition(
-        //         position: animation.drive(tween),
-        //         child: child,
-        //         );
-        //       },
-        //     );
-        //   }
-        // } 
-        routes: {
-          HomeScreen.routeName:(context) => const HomeScreen(),
-          AjinomotoScreen.routeName:(context) => const AjinomotoScreen(),
-          MasakoScreen.routeName:(context) => const MasakoScreen(),
-          MayumiScreen.routeName:(context) => const MayumiScreen(),
-          SajikuScreen.routeName:(context) => const SajikuScreen(),
-          AjinomotoEntryScreen.routeName:(context) => const AjinomotoEntryScreen(),
-          MasakoEntryScreen.routeName:(context) => const MasakoEntryScreen(),
-          MayumiEntryScreen.routeName:(context) => const MayumiEntryScreen(),
-          SajikuEntryScreen.routeName:(context) => const SajikuEntryScreen(),
-        },
-      ),
-      // child: Consumer<ThemeChanger>(
-      //   builder: (context, value, child) {
-      //     return MaterialApp(
-      //       debugShowCheckedModeBanner: false,
-      //       title: 'Flutter Demo',
-      //       theme: value.getTheme(),
-      //       initialRoute: HomeScreen.routeName,
-      //       routes: {
-              // HomeScreen.routeName:(context) => const HomeScreen(),
-              // AjinomotoScreen.routeName:(context) => const AjinomotoScreen(),
-              // MasakoScreen.routeName:(context) => const MasakoScreen(),
-              // MayumiScreen.routeName:(context) => const MayumiScreen(),
-              // SajikuScreen.routeName:(context) => const SajikuScreen(),
-              // AjinomotoEntryScreen.routeName:(context) => const AjinomotoEntryScreen(),
-              // MasakoEntryScreen.routeName:(context) => const MasakoEntryScreen(),
-              // MayumiEntryScreen.routeName:(context) => const MayumiEntryScreen(),
-              // SajikuEntryScreen.routeName:(context) => const SajikuEntryScreen(),
-      //       },
-      //     );
-      //   },
-      // ),
+    return Consumer<ThemeChanger>(
+      builder: (context, themeChanger, child) {
+        return MaterialApp(
+          title: 'Flutter Project',
+          debugShowCheckedModeBanner: false,
+          theme: themeChanger.getTheme(),
+          home: const HomeScreen(),
+        );
+      }
     );
   }
 }

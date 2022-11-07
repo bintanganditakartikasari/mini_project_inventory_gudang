@@ -27,19 +27,6 @@ class MayumiViewModel with ChangeNotifier {
     }
   }
 
-  // Future<void> getMayumiData() async {
-  //   try {
-  //     final result = await MayumiAPI.getMayumi();
-  //     result.sort(
-  //       ((a, b) => a.tanggalProduksi.toString().compareTo(b.tanggalProduksi.toString()))
-  //     );
-  //     _mayumi = result;
-  //     notifyListeners();
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
   Future<void> addMayumi(Mayumi newMayumi) async {
     try{
       final result = await MayumiAPI().addMayumi(newMayumi);

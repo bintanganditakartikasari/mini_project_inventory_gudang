@@ -1,10 +1,13 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_project_inventory_gudang/models/Masako_model.dart';
+import 'package:mini_project_inventory_gudang/view_model/masako_view_model.dart';
+import 'package:provider/provider.dart';
 
 class MasakoEntryScreen extends StatefulWidget {
   static const routeName = '/masako/new';
-  const MasakoEntryScreen({super.key});
+  final Masako? masako;
+  const MasakoEntryScreen({super.key, this.masako});
 
   @override
   State<MasakoEntryScreen> createState() => _MasakoEntryScreen();
@@ -18,13 +21,65 @@ class _MasakoEntryScreen extends State<MasakoEntryScreen> {
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
 
-  late DatabaseReference dbRefMasako;
-
   @override
   void initState(){
     super.initState();
-    dbRefMasako = FirebaseDatabase.instance.ref().child('Masako');
+    if(widget.masako != null) {
+      final data = widget.masako!;
+      namaController.text = data.nama ?? '';
+      beratController.text = data.berat ?? '';
+      jumlahController.text = data.jumlah ?? '';
+      produksiController.text = data.tanggalProduksi ?? '';
+      expiredController.text = data.tanggalExpired ?? '';
+    }
   }
+
+  Future<void> _submitDataMasako() async {
+    if (namaController.text.isEmpty || 
+        beratController.text.isEmpty ||
+        jumlahController.text.isEmpty ||
+        produksiController.text.isEmpty ||
+        expiredController.text.isEmpty) {
+      return;    
+    }
+
+    final nama = namaController.text;
+    final berat = beratController.text;
+    final jumlah = jumlahController.text;
+    final tanggalProduksi = produksiController.text;
+    final tanggalExpired = expiredController.text;
+
+    try {
+      if (widget.masako != null) {
+        final data = widget.masako!;
+        final updateMasakoData = Masako(
+          id: data.id, 
+          nama: nama, 
+          berat: berat, 
+          jumlah: jumlah, 
+          tanggalProduksi: tanggalProduksi, 
+          tanggalExpired: tanggalExpired
+        );
+
+        await Provider.of<MasakoViewModel>(context, listen: false).updateMasako(updateMasakoData);
+      } else {
+        final newMasako = Masako(
+          nama: nama, 
+          berat: berat, 
+          jumlah: jumlah, 
+          tanggalProduksi: tanggalProduksi, 
+          tanggalExpired: tanggalExpired);
+
+          await Provider.of<MasakoViewModel>(context, listen: false).addMasako(newMasako);
+      }
+    } catch (error) {
+      return;
+    }
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +167,8 @@ class _MasakoEntryScreen extends State<MasakoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: namaController,
+                      keyboardType: TextInputType.name,
+                      onFieldSubmitted: (value) => _submitDataMasako(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -136,6 +193,8 @@ class _MasakoEntryScreen extends State<MasakoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: beratController,
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (value) => _submitDataMasako(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -160,6 +219,8 @@ class _MasakoEntryScreen extends State<MasakoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: jumlahController,
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (value) => _submitDataMasako()
                     ),
                     const SizedBox(
                       height: 10,
@@ -184,6 +245,8 @@ class _MasakoEntryScreen extends State<MasakoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: produksiController,
+                      keyboardType: TextInputType.datetime,
+                      onFieldSubmitted: (value) => _submitDataMasako()
                     ),
                     const SizedBox(
                       height: 10,
@@ -208,23 +271,15 @@ class _MasakoEntryScreen extends State<MasakoEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: expiredController,
+                      keyboardType: TextInputType.datetime,
+                      onFieldSubmitted: (value) => _submitDataMasako()
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Center(
                       child: ElevatedButton(
-                        onPressed: (){
-                          Map<String, String> masako = {
-                            'nama produk': namaController.text,
-                            'jumlah produk': jumlahController.text,
-                            'berat produk': beratController.text,
-                            'tanggal produksi': produksiController.text,
-                            'tanggal expired': expiredController.text,
-                          };
-                          dbRefMasako.push().set(masako);
-                          Navigator.of(context).pop();
-                        }, 
+                        onPressed: _submitDataMasako, 
                         style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
                         ),

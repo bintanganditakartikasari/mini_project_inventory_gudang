@@ -16,11 +16,6 @@ class ThemeChanger extends ChangeNotifier {
     _selectedTheme = isDarkTheme ? dark : light;
   } 
 
-  // ignore: non_constant_identifier_names
-  ThemeCharger(bool darkThemeOn) {
-    _selectedTheme = darkThemeOn ? dark : light;
-  }
-
   Future<void> swapTheme() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 

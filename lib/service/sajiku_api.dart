@@ -2,20 +2,14 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:mini_project_inventory_gudang/models/Sajiku_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SajikuAPI {
   static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Sajiku.json';
-  // final Dio _dio = Dio();
 
   Future<List<Sajiku>> getSajiku() async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Sajiku')){
-    //   return [];
-    // }
 
     List<Sajiku> data = [];
-    // final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
+
     try {
       final response = await Dio().get(baseURL);
       if (response.data != null && response.data.isNotEmpty) {
@@ -43,12 +37,7 @@ class SajikuAPI {
   }
 
   Future<Sajiku?> addSajiku(Sajiku sajiku) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Sajiku')){
-    //   return null;
-    // }
-
-    // final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
+    
     try {
       final response = await Dio().post(
         baseURL,
@@ -77,15 +66,10 @@ class SajikuAPI {
   }
 
   Future<bool> updateSajiku(Sajiku newSajiku) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Sajiku')){
-    //   return false;
-    // }
-
-    // final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
+    
     try{
       await Dio().patch(
-        baseURL,
+        'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Sajiku/${newSajiku.id}.json',
         data: jsonEncode(
           {
             'nama produk': newSajiku.nama,
@@ -103,14 +87,9 @@ class SajikuAPI {
   }
 
   Future<bool> deleteSajiku(String id) async {
-    // final prefs = await SharedPreferences.getInstance();
-    // if(!prefs.containsKey('Sajiku')){
-    //   return false;
-    // }
-
-    // final extractedSajikuData = jsonDecode(prefs.getString('Sajiku').toString());
+    
     try {
-      await Dio().delete(baseURL);
+      await Dio().delete('https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Sajiku/$id.json');
       return true;
     } catch (error) {
       rethrow;

@@ -1,10 +1,13 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_project_inventory_gudang/models/Sajiku_model.dart';
+import 'package:mini_project_inventory_gudang/view_model/sajiku_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SajikuEntryScreen extends StatefulWidget {
   static const routeName = '/sajiku/new';
-  const SajikuEntryScreen({super.key});
+  final Sajiku? sajiku;
+  const SajikuEntryScreen({super.key, this.sajiku});
 
   @override
   State<SajikuEntryScreen> createState() => _SajikuEntryScreen();
@@ -18,13 +21,65 @@ class _SajikuEntryScreen extends State<SajikuEntryScreen> {
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
 
-  late DatabaseReference dbRefSajiku;
-
   @override
   void initState(){
     super.initState();
-    dbRefSajiku = FirebaseDatabase.instance.ref().child('Sajiku');
+    if(widget.sajiku != null) {
+      final data = widget.sajiku!;
+      namaController.text = data.nama ?? '';
+      beratController.text = data.berat ?? '';
+      jumlahController.text = data.jumlah ?? '';
+      produksiController.text = data.tanggalProduksi ?? '';
+      expiredController.text = data.tanggalExpired ?? '';
+    }
   }
+
+  Future<void> _submitDataSajiku() async {
+    if (namaController.text.isEmpty || 
+        beratController.text.isEmpty ||
+        jumlahController.text.isEmpty ||
+        produksiController.text.isEmpty ||
+        expiredController.text.isEmpty) {
+      return;    
+    }
+
+    final nama = namaController.text;
+    final berat = beratController.text;
+    final jumlah = jumlahController.text;
+    final tanggalProduksi = produksiController.text;
+    final tanggalExpired = expiredController.text;
+
+    try {
+      if (widget.sajiku != null) {
+        final data = widget.sajiku!;
+        final updateSajikuData = Sajiku(
+          id: data.id, 
+          nama: nama, 
+          berat: berat, 
+          jumlah: jumlah, 
+          tanggalProduksi: tanggalProduksi, 
+          tanggalExpired: tanggalExpired
+        );
+
+        await Provider.of<SajikuViewModel>(context, listen: false).updateSajiku(updateSajikuData);
+      } else {
+        final newSajiku = Sajiku(
+          id: '',
+          nama: nama, 
+          berat: berat, 
+          jumlah: jumlah, 
+          tanggalProduksi: tanggalProduksi, 
+          tanggalExpired: tanggalExpired);
+
+          await Provider.of<SajikuViewModel>(context, listen: false).addSajiku(newSajiku);
+      }
+    } catch (error) {
+      return;
+    }
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +167,8 @@ class _SajikuEntryScreen extends State<SajikuEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: namaController,
+                      keyboardType: TextInputType.name,
+                      onFieldSubmitted: (value) => _submitDataSajiku(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -136,6 +193,8 @@ class _SajikuEntryScreen extends State<SajikuEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: beratController,
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (value) => _submitDataSajiku(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -160,6 +219,8 @@ class _SajikuEntryScreen extends State<SajikuEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: jumlahController,
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (value) => _submitDataSajiku(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -184,6 +245,8 @@ class _SajikuEntryScreen extends State<SajikuEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: produksiController,
+                      keyboardType: TextInputType.datetime,
+                      onFieldSubmitted: (value) => _submitDataSajiku(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -208,23 +271,15 @@ class _SajikuEntryScreen extends State<SajikuEntryScreen> {
                         fillColor: Colors.white,
                       ),
                       controller: expiredController,
+                      keyboardType: TextInputType.datetime,
+                      onFieldSubmitted: (value) => _submitDataSajiku(),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Center(
                       child: ElevatedButton(
-                        onPressed: (){
-                          Map<String, String> sajiku = {
-                            'nama produk': namaController.text,
-                            'jumlah produk': jumlahController.text,
-                            'berat produk': beratController.text,
-                            'tanggal produksi': produksiController.text,
-                            'tanggal expired': expiredController.text,
-                          };
-                          dbRefSajiku.push().set(sajiku);
-                          Navigator.of(context).pop();
-                        }, 
+                        onPressed: _submitDataSajiku, 
                         style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143)),
                         ),
