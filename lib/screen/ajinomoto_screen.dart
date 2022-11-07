@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mini_project_inventory_gudang/models/ajinomoto_model.dart';
 import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_ajinomoto.dart';
 import 'package:mini_project_inventory_gudang/view_model/ajinomoto_view_model.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +24,13 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    final Ajinomoto newAjinomoto = Ajinomoto(
+      berat: beratController.toString(), 
+      jumlah: jumlahController.toString(), 
+      nama: namaController.toString(), 
+      tanggalExpired: expiredController.toString(), 
+      tanggalProduksi: produksiController.toString());
 
     var dataAjinomoto = Provider.of<AjinomotoViewModel>(context);
 
@@ -407,11 +415,11 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Nama Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].nama}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                              Text('Berat Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].berat} gr', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                              Text('Jumlah Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].jumlah} pcs', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                              Text('Tanggal Produksi Produk  : ${dataAjinomoto.ajinomoto[index].tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
-                              Text('Tanggal Expired Produk \t\t\t: ${dataAjinomoto.ajinomoto[index].tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13, color: Colors.black)),
+                              Text('Nama Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].nama}', style: GoogleFonts.poppins(fontSize: 13)),
+                              Text('Berat Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].berat} gr', style: GoogleFonts.poppins(fontSize: 13)),
+                              Text('Jumlah Produk \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: ${dataAjinomoto.ajinomoto[index].jumlah} pcs', style: GoogleFonts.poppins(fontSize: 13)),
+                              Text('Tanggal Produksi Produk  : ${dataAjinomoto.ajinomoto[index].tanggalProduksi}', style: GoogleFonts.poppins(fontSize: 13)),
+                              Text('Tanggal Expired Produk \t\t\t: ${dataAjinomoto.ajinomoto[index].tanggalExpired}', style: GoogleFonts.poppins(fontSize: 13)),
                             ],
                           ),
                         ],
@@ -441,7 +449,7 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                               children: [
                                                 Center(
                                                   widthFactor: double.infinity,
-                                                  child: Text('Apakah anda yakin akan menghapus ${dataAjinomoto.ajinomoto[index].nama}?', style: GoogleFonts.poppins(fontSize: 15, color: Colors.black)),
+                                                  child: Text('Apakah anda yakin akan menghapus ${dataAjinomoto.ajinomoto[index].nama}?', style: GoogleFonts.poppins(fontSize: 15)),
                                                 ),
                                                 const SizedBox(
                                                   height: 10,
@@ -451,7 +459,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                                   children: [
                                                     ElevatedButton(
                                                       onPressed: (){
-                                                        //masih hapus semua data. Nanti coba lagi
                                                         Provider.of<AjinomotoViewModel>(context, listen: false).deleteAjinomoto(dataAjinomoto.ajinomoto[index].id!.toString());
                                                         Navigator.of(context).pop();
                                                       }, 
@@ -533,8 +540,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                                     ),
                                                       hintText: 'Nama Produk',
                                                       hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-                                                      filled: true,
-                                                      fillColor: Colors.white,
                                                   ),
                                                   controller: namaController,
                                                   keyboardType: TextInputType.name,
@@ -558,8 +563,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                                     ),
                                                       hintText: 'Berat Bersih Produk',
                                                       hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-                                                      filled: true,
-                                                      fillColor: Colors.white,
                                                   ),
                                                   controller: beratController,
                                                   keyboardType: TextInputType.number,
@@ -583,8 +586,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                                     ),
                                                       hintText: 'Jumlah Produk',
                                                       hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-                                                      filled: true,
-                                                      fillColor: Colors.white,
                                                   ),
                                                   controller: jumlahController,
                                                   keyboardType: TextInputType.number,
@@ -608,8 +609,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                                     ),
                                                       hintText: 'Tanggal Produksi Produk',
                                                       hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-                                                      filled: true,
-                                                      fillColor: Colors.white,
                                                   ),
                                                   controller: produksiController,
                                                   keyboardType: TextInputType.datetime,
@@ -633,8 +632,6 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                                     ),
                                                       hintText: 'Tanggal Expired Produk',
                                                       hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
-                                                      filled: true,
-                                                      fillColor: Colors.white,
                                                   ),
                                                   controller: expiredController,
                                                   keyboardType: TextInputType.datetime,
@@ -644,8 +641,19 @@ class _AjinomotoScreenState extends State<AjinomotoScreen> {
                                                 ),
                                                 Center(
                                                   child: ElevatedButton(
-                                                    onPressed: (){
-                                                      // Provider.of<AjinomotoViewModel>(context, listen: false).updateAjinomoto();
+                                                    onPressed: () async {
+                                                      if (formKey.currentState!.validate()) {
+                                                        final ajinomoto = Provider.of<AjinomotoViewModel>(context, listen: false);
+                                                        Ajinomoto ajinomotoData = Ajinomoto(
+                                                          id: newAjinomoto.id,
+                                                          nama: newAjinomoto.nama, 
+                                                          berat: newAjinomoto.berat, 
+                                                          jumlah: newAjinomoto.jumlah, 
+                                                          tanggalProduksi: newAjinomoto.tanggalProduksi, 
+                                                          tanggalExpired: newAjinomoto.tanggalExpired,
+                                                        );
+                                                      }
+                                                      await ajinomotoData.updateAjinomoto(ajinomoto.ajinomotoData);
                                                     },
                                                     style: const ButtonStyle(
                                                       backgroundColor: MaterialStatePropertyAll<Color>(Color.fromARGB(255, 48, 160, 143))
