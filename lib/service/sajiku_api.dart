@@ -6,12 +6,18 @@ import 'package:mini_project_inventory_gudang/models/Sajiku_model.dart';
 class SajikuAPI {
   static const baseURL = 'https://cloudminiproject-inventory-default-rtdb.asia-southeast1.firebasedatabase.app/Sajiku.json';
 
+  late Dio _dio;
+
+  SajikuAPI(){
+    _dio = Dio();
+  }
+
   Future<List<Sajiku>> getSajiku() async {
 
     List<Sajiku> data = [];
 
     try {
-      final response = await Dio().get(baseURL);
+      final response = await _dio.get(baseURL);
       if (response.data != null && response.data.isNotEmpty) {
       final extractedData = response.data as Map<String, dynamic>;
       if(extractedData.isEmpty) {
