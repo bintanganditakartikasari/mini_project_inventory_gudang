@@ -9,23 +9,6 @@ import 'package:mini_project_inventory_gudang/view_model/sajiku_view_model.dart'
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   Firebase.initializeApp();
-//   runApp(const MyApp());
-// }
-
-// Future<void> main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   Firebase.initializeApp();
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   return runApp(
-//     ChangeNotifierProvider(
-//       child: const MyApp(),
-//       create: (BuildContext context) => ThemeChanger(isDarkTheme: prefs.getBool('isDarkTheme') ?? false),
-//     )
-//   );
-// }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

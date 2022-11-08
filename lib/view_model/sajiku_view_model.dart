@@ -27,19 +27,6 @@ class SajikuViewModel with ChangeNotifier {
     }
   }
 
-  // Future<void> getSajikuData() async {
-  //   try {
-  //     final result = await SajikuAPI.getSajiku();
-  //     result.sort(
-  //       ((a, b) => a.tanggalProduksi.toString().compareTo(b.tanggalProduksi.toString()))
-  //     );
-  //     _sajiku = result;
-  //     notifyListeners();
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
   Future<void> addSajiku(Sajiku newSajiku) async {
     try{
       final result = await SajikuAPI().addSajiku(newSajiku);
