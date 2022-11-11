@@ -18,14 +18,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
               padding: const EdgeInsets.only(bottom: 20),
-              height: size.height * 0.3 - 40,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -61,6 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Text('Inventory Gudang', style: GoogleFonts.poppins(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),),
                         Text('Pabrik Ajinomoto', style: GoogleFonts.poppins(fontSize: 15, color: Colors.white, fontWeight: FontWeight.bold),),
+                        const SizedBox(
+                          height: 20,
+                        )
                       ],
                     ),
                     Row(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:mini_project_inventory_gudang/models/Sajiku_model.dart';
 import 'package:mini_project_inventory_gudang/screen/entry_screen/entry_screen_sajiku.dart';
 import 'package:mini_project_inventory_gudang/view_model/sajiku_view_model.dart';
@@ -21,6 +22,12 @@ class _SajikuScreenState extends State<SajikuScreen> {
   final jumlahController = TextEditingController();
   final produksiController = TextEditingController();
   final expiredController = TextEditingController();
+
+  DateTime selectDateExpired = DateTime.now();
+  final currentDateExpired = DateTime.now();
+
+  DateTime selectDateProduksi = DateTime.now();
+  final currentDateProduksi = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +150,7 @@ class _SajikuScreenState extends State<SajikuScreen> {
                                                     ElevatedButton(
                                                       onPressed: (){
                                                         //masih hapus semua data. Nanti coba lagi
-                                                        Provider.of<SajikuViewModel>(context, listen: false).deleteSajiku(dataSajiku.sajiku[index].id!.toString());
+                                                        Provider.of<SajikuViewModel>(context, listen: false).deleteSajiku(dataSajiku.sajiku[index].id.toString());
                                                         Navigator.of(context).pop();
                                                       }, 
                                                       style: const ButtonStyle(
@@ -226,8 +233,10 @@ class _SajikuScreenState extends State<SajikuScreen> {
                                                             Icons.inventory_2,
                                                             color: Color.fromARGB(255, 48, 160, 143),
                                                           ),
-                                                            hintText: 'Nama Produk',
-                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                          labelText: 'Nama Produk',
+                                                          labelStyle: const TextStyle(color: Color.fromARGB(255, 48, 160, 143)),
+                                                          hintText: 'Nama Produk',
+                                                          hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
                                                         ),
                                                         controller: namaController,
                                                         keyboardType: TextInputType.name,
@@ -255,8 +264,10 @@ class _SajikuScreenState extends State<SajikuScreen> {
                                                             Icons.note_add_outlined,
                                                             color: Color.fromARGB(255, 48, 160, 143),
                                                           ),
-                                                            hintText: 'Berat Bersih Produk',
-                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                          labelText: 'Berat Bersih Produk',
+                                                          labelStyle: const TextStyle(color: Color.fromARGB(255, 48, 160, 143)),
+                                                          hintText: 'Berat Bersih Produk',
+                                                          hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
                                                         ),
                                                         controller: beratController,
                                                         keyboardType: TextInputType.number,
@@ -284,8 +295,10 @@ class _SajikuScreenState extends State<SajikuScreen> {
                                                             Icons.add_circle_outline_rounded,
                                                             color: Color.fromARGB(255, 48, 160, 143),
                                                           ),
-                                                            hintText: 'Jumlah Produk',
-                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                          labelText: 'Jumlah Produk',
+                                                          labelStyle: const TextStyle(color: Color.fromARGB(255, 48, 160, 143)),
+                                                          hintText: 'Jumlah Produk',
+                                                          hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
                                                         ),
                                                         controller: jumlahController,
                                                         keyboardType: TextInputType.number,
@@ -313,8 +326,10 @@ class _SajikuScreenState extends State<SajikuScreen> {
                                                             Icons.date_range,
                                                             color: Color.fromARGB(255, 48, 160, 143),
                                                           ),
-                                                            hintText: 'Tanggal Produksi Produk',
-                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                          labelText: 'Tanggal Produksi Produksi',
+                                                          labelStyle: const TextStyle(color: Color.fromARGB(255, 48, 160, 143)),
+                                                          hintText: DateFormat('dd-MM-yyyy').format(selectDateProduksi),
+                                                          hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
                                                         ),
                                                         controller: produksiController,
                                                         keyboardType: TextInputType.datetime,
@@ -324,6 +339,19 @@ class _SajikuScreenState extends State<SajikuScreen> {
                                                           }
                                                           return null;
                                                         },
+                                                        onTap: () async {
+                                                          final selectedDateProduksi = await showDatePicker(
+                                                            context: context,
+                                                            initialDate: selectDateProduksi,
+                                                            firstDate: DateTime(2000),
+                                                            lastDate: DateTime(3000),
+                                                          );
+                                                          if (selectedDateProduksi != null) {
+                                                            setState(() {
+                                                            selectDateProduksi = selectedDateProduksi;
+                                                            produksiController.text = DateFormat('dd-MM-yyyy').format(selectDateProduksi);
+                                                          });
+                                                        }},
                                                       ),
                                                       const SizedBox(
                                                         height: 10,
@@ -342,8 +370,10 @@ class _SajikuScreenState extends State<SajikuScreen> {
                                                             Icons.date_range,
                                                             color: Color.fromARGB(255, 48, 160, 143),
                                                           ),
-                                                            hintText: 'Tanggal Expired Produk',
-                                                            hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
+                                                          labelText: 'Tanggal Expired Produksi',
+                                                          labelStyle: const TextStyle(color: Color.fromARGB(255, 48, 160, 143)),
+                                                          hintText: DateFormat('dd-MM-yyyy').format(selectDateExpired),
+                                                          hintStyle: const TextStyle(color:Color.fromARGB(255, 48, 160, 143)),
                                                         ),
                                                         controller: expiredController,
                                                         keyboardType: TextInputType.datetime,
@@ -353,6 +383,19 @@ class _SajikuScreenState extends State<SajikuScreen> {
                                                           }
                                                           return null;
                                                         },
+                                                        onTap: () async {
+                                                          final selectedDateExpired = await showDatePicker(
+                                                            context: context,
+                                                            initialDate: selectDateExpired,
+                                                            firstDate: DateTime(2000),
+                                                            lastDate: DateTime(3000),
+                                                          );
+                                                          if (selectedDateExpired != null) {
+                                                            setState(() {
+                                                            selectDateExpired = selectedDateExpired;
+                                                            expiredController.text = DateFormat('dd-MM-yyyy').format(selectDateExpired);
+                                                          });
+                                                        }},
                                                       ),
                                                     ],
                                                   ),
